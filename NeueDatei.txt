@@ -1,3 +1,131 @@
-Hlalowae flasjfd
 
-asf
+#######################
+#  TECHNICAL START ####
+#######################
+
+sequence:
+- note: SNDC_LucysExperience
+
+
+#######################
+#START  ############### 
+#######################
+
+- alias: START
+  note: Beat note 
+  sequence:
+    - label: Start the AV Episode with first important line
+      choice:      
+
+      - say: Hello how are you ?
+        tags: [$important]
+
+      - say: I'm good thanks!
+
+      - say: nothng
+        note: prompt the guest with important story line.
+        tags: [$continue]
+        goto: BEAT-NEWNAME
+
+
+######### LOOP ##        
+    - goto: START
+
+
+############################
+############################
+
+- alias: BEAT-NEWNAME
+  note: Beat note 
+  sequence:
+
+    - label: Choose Label. 
+      choice:
+
+      - say: nothng
+        note: repeat previous prompt
+
+      - say: this was written collaboratively
+        tags: [$important]
+
+      - label: GUEST - 
+        say: nothng
+
+      - say: nothng
+        tags: [$alt]
+
+      - label: First Line of Sequence
+        tags: [$continue] 
+        sequence:
+          - say: nothng
+          - say: nothng
+        goto: BEAT-2
+
+######### LOOP ##
+    - goto: BEAT-NEWNAME
+
+
+############################
+############################
+
+- alias: BEAT-2 
+  note: Beat note 
+  sequence:
+
+    - label: Choose Label. 
+      choice:
+
+      - say: nothng
+        note: repeat previous prompt
+
+      - say: nothng
+        tags: [$important]
+
+      - label: GUEST - 
+        say: nothng
+
+      - say: nothng
+        tags: [$alt]
+
+      - label: First Line of Sequence
+        tags: [$continue] 
+        sequence:
+          - say: nothng
+          - say: nothng
+
+######### LOOP ##
+    - goto: BEAT-2 
+
+
+############################
+############################
+
+
+
+
+
+- alias: END
+  note: Beat note 
+  sequence:
+    - label: LOGOFF as image after hanging up
+      choice: 
+
+      - event: load-scene bbs_terminal
+        note: Load Terminal Scene ! AFTER ! hanging up
+        tags: [$alt]
+
+      - say: LUCYANDPIG LOGOFF
+        note: AS TEXT IMAGE
+
+      - label: <RETURN TO INDEX>
+        goto: INDEX
+
+######### LOOP ##
+    - goto: END
+
+
+####################################
+#END  ############### 
+####################################
+
+
