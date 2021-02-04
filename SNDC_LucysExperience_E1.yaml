@@ -1,0 +1,267 @@
+
+#######################
+#  TECHNICAL START ####
+#######################
+
+sequence:
+- note: SNDC_LucysExperience
+- event: load-scene Sundance_Attic
+
+
+#######################
+#  INDEX  #############
+#######################
+
+ 
+- alias: INDEX
+- choice:
+  - goto: INDEX
+  - goto: BBS
+  - goto: START
+  - goto: BEAT-1
+  - goto: BEAT-2
+  - goto: END
+  - goto: EVENT_LIBRARY
+
+#######################
+
+- alias: BBS
+  note: Transition scene 
+  sequence:
+    - label: LOGON as image before turning camera on
+      choice: 
+       
+      - event: load-scene bbs_terminal
+        note: Load Terminal Scene - turn off camera if already in google hangout
+
+      - say: LUCYANDPIG LOGON
+        note: AS TEXT IMAGE
+
+      - event: load-scene PianoLessons_E1 
+        tags: [$continue]
+        goto: START
+
+
+######### LOOP ##        
+    - goto: BBS
+
+
+#######################
+#######################
+
+#######################
+#START  ############### 
+#######################
+
+- alias: START
+  note: Beat note 
+  sequence:
+    - label: Start the AV Episode with first important line
+      choice:      
+
+      - say: 
+        tags: [$important]
+
+      - say:
+        note: prompt the guest with important story line.
+        tags: [$continue]
+        goto: BEAT-1
+
+
+######### LOOP ##        
+    - goto: START
+
+
+############################
+############################
+
+- alias: BEAT-1 
+  note: Beat note 
+  sequence:
+
+    - label: Choose Label. 
+      choice:
+
+      - say: 
+        note: repeat previous prompt
+
+      - say:
+        tags: [$important]
+
+      - label: GUEST - 
+        say: 
+
+      - say: 
+        tags: [$alt]
+
+      - label: First Line of Sequence
+        tags: [$continue] 
+        sequence:
+          - say: 
+          - say: 
+        goto: BEAT-2
+
+######### LOOP ##
+    - goto: BEAT-1 
+
+
+############################
+############################
+
+- alias: BEAT-2 
+  note: Beat note 
+  sequence:
+
+    - label: Choose Label. 
+      choice:
+
+      - say: 
+        note: repeat previous prompt
+
+      - say:
+        tags: [$important]
+
+      - label: GUEST - 
+        say: 
+
+      - say: 
+        tags: [$alt]
+
+      - label: First Line of Sequence
+        tags: [$continue] 
+        sequence:
+          - say: 
+          - say: 
+        goto: BEAT-3
+
+######### LOOP ##
+    - goto: BEAT-2 
+
+
+############################
+############################
+
+
+
+
+
+- alias: END
+  note: Beat note 
+  sequence:
+    - label: LOGOFF as image after hanging up
+      choice: 
+
+      - event: load-scene bbs_terminal
+        note: Load Terminal Scene ! AFTER ! hanging up
+        tags: [$alt]
+
+      - say: LUCYANDPIG LOGOFF
+        note: AS TEXT IMAGE
+
+      - label: <RETURN TO INDEX>
+        goto: INDEX
+
+######### LOOP ##
+    - goto: END
+
+
+####################################
+#END  ############### 
+####################################
+
+
+
+
+# ADD ASSIST LINES
+
+- alias: ASSIST_EPISODE_ID  
+  sequence:
+    - choice:
+
+      - say: 
+        tags: []
+
+    - goto: ASSIST_EPISODE_ID 
+
+# ADD EVENTS AVAILABLE IN THIS EPISODE
+
+- alias: EVENT_LIBRARY
+  sequence:
+    - choice:
+
+      - event: placeholder-event Lucy-does-something
+
+    - goto: EVENT_LIBRARY
+
+
+
+
+# ##################################### 
+
+# ####################################
+# #REFERENCE   ############### 
+# ####################################
+
+
+# ####################################
+# #START  ############### 
+# ####################################
+
+# - alias: START
+#   note: Beat note 
+#   sequence:
+#     - label: Start the AV Episode with first important line
+#       choice:      
+
+#       - say: This is the first and very important line of this audio visual episode.
+#         tags: [$important]
+
+#       - say: This will only show up as a choice when the condition is valid.
+#         condition: FULL_NAME == 'PETER'
+
+#       - event: placeholder-event Lucy-does-something
+#         note: this is a placeholder event to describe something on screen that we can't show visually.
+
+#       - say: I want to continue to the next important beat with an important story line and prompt the guest.
+#         tags: [$continue]
+#         goto: BEAT-1
+
+
+# ######### LOOP ##        
+#     - goto: START
+
+
+# ############################
+# ############################
+
+# - alias: BEAT-1
+#   note: Beat note
+#   sequence:
+
+#     - label: Choose Label. 
+#       choice:
+
+#       - say: I said, I want to continue to the next important beat and repeat the prompt with this so that I don't have to got back to the previous branch.
+#         note: repeat variation
+
+#       - say: This is the first and very important line of this beat
+#         tags: [$important]
+
+#       - say: This is a line that could be the expected response to the Guests last input
+#         note: This is a general line with a note
+
+#       - say: This is an alternative line
+#         tags: [$alt]
+
+#       - label: This is the label for a sequence to continue to the next beat
+#         tags: [$continue] 
+#         sequence:
+#           - say: Well anyway. We talked long enough about this topic.
+#           - say: I want to continue to the next important beat with an important story line and prompt the guest.
+#           - say: I want to be able to anticipate what the guest says as I move to the next beat.
+#         goto: BEAT-2
+
+# ######### LOOP ##
+#     - goto: BEAT-1 
+# ############################
+# ############################
