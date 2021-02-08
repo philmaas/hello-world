@@ -1,0 +1,2754 @@
+
+#######################
+#  TECHNICAL START ####
+#######################
+
+sequence:
+- note: SNDC_LucysExperience
+- event: load-scene Sundance_Attic
+
+
+#######################
+#  INDEX  #############
+#######################
+
+ 
+- alias: INDEX
+- choice:
+  - goto: START
+  - goto: GETTING_THERE
+  - goto: SUNDANCE_EXPERIENCE
+  - goto: BLOOD_GAZPACHO
+  - goto: WRITING 
+  - goto: DIRECTING_CHARACTER
+  - goto: BACK_HOME
+  - goto: GENERAL_QA
+  - goto: OUTRO
+  - goto: TANGENTS
+  - goto: DRACULA_FALLBACKS
+
+#######################
+
+
+####################################
+############  BBS  ############### 
+####################################
+
+
+- alias: BBS
+
+  note: Use a combination of these phrases to get guest to dial in or schedule. 
+  sequence:
+    - choice: 
+
+      - event: load-scene bbs_terminal
+        note: loads the BBS for improvized text interaction before AV
+
+      - event: load-scene Sundance_Attic
+        goto: START
+        tags: [$continue]
+
+######### LOOP ##        
+    - goto: BBS
+
+- alias: START
+  note: Beat note 
+  sequence:
+
+    - label: Start the AV Episode with first important line
+      choice:
+
+        - goto: GETTING_THERE
+          tags: [$continue]
+
+        - label: HOST - Hi Lucy
+          say: Oh hi! Yay!
+          audiofile: VO_Oh_hi_Yay_01.wav
+
+        - say: Hehe Hi.
+          audiofile: VO_Hehe_hi_01.wav
+
+        - say: So I should introduce myself...?
+          audiofile: VO_So_I_should_introduce_myself_01.wav
+
+        - say: Let's all go around and introduce ourselves.
+          audiofile: VO_Lets_all_go_around_02.wav
+
+        - say: I'm eight-and-a-half-years-old, and Nana says I'm wise beyond my years!
+          audiofile: VO_Im_eight_Nana_01.wav
+          
+        - label: HOST - How are you today?
+          say: I'm good, how are you? #REVIEW: use generic or ADD generic Cadence?
+
+        - label: Why don't you start by telling us a little bit about yourself 
+          sequence:
+            - say: Okay! #REVIEW: user generic or add as an override?
+            - say: I'm Lucy, I'm eight and a half years old I'm in fourth grade, which is fun! Especially science class. #REVIEW use cadence and remove next line?
+            - say: I also just showed my new film at the Sundance film festival! #REVIEW: resemble not great
+        
+        - label: HOST - Tell me more about going to Sundance  #REVIEW: Do we have more?
+          sequence:
+            - say: I went to Park City with my mom.
+              audiofile: VO_I_went_to_park_city_with_my_mom_01.wav
+            - say: We're back home now.
+              audiofile: VO_We_re_back_home_now_04.wav
+
+     ######### LOOP ##  
+     
+    - goto: START
+
+- alias: GETTING_THERE
+  note: Beat note 
+  sequence:
+
+    - label: Start the AV Episode with first important line
+      choice:
+
+        - goto: SUNDANCE_EXPERIENCE
+          tags: [$continue]
+
+        - goto: START
+
+        - label: HOST -  How did you get there?
+        #### insert: mom drove me
+          say: We took the big street west until we reached the mountains.
+
+        - say: Ummm, my Mom drove me? She said she needed a break from work and wanted to see the mountains.
+          audiofile: VO_Um_My_mom_drove_me_02.wav
+
+        - label: HOST -  Was it a long drive?
+          sequence:
+            - say: It took us 8 hours!!!
+            - say: As soon as we saw the snowy mountains Mom started smiling.  #REVIEW: Compare different or old Resemble voice ID
+            - say: We listened to the radio most of the time. 
+
+        - label: HOST -  What did you listen to?
+          sequence:
+            - say: Did you know about all the UFO's there? They talked about them on the radio. #REVIEW: UFO's  not really working
+            - say: Mom didn't believe a word they said and she couldn't stop laughing.
+
+        - label: HOST - UFO [CONT.]
+          say: Maybe I can find a little alien and take him with me on a bicycle just like in that movie and then we can fly over the forest and lake near my house!
+
+        - label: HOST -  Where did you stay?
+        - say: We stayed at the lodge...close to mainstreet. ...
+          audiofile: VO_We_stayed_at_the_lodge_close_to_mainstreet_02.wav
+        - say: Mom booked us a lodge. It was cozy and she said it was a fair price too.
+          tags: [$alt]
+        
+
+######### LOOP ##   
+    - goto: GETTING_THERE
+
+- alias: SUNDANCE_EXPERIENCE
+  note: Beat note 
+  sequence:
+    - choice:
+        #Festival
+      - goto: BLOOD_GAZPACHO
+        tags: [$continue]
+
+      - label: HOST -  Did you get to see a lot of movies?
+        say: Yes! The lines were really long sometimes, but we got tickets anyway. It was a lot of fun to talk to the other people in line. So it didn't feel like we waited for that long!
+
+      - label: HOST -  What did you watch?
+        sequence:
+          - say: I wanted to see a scary movie for inspiration. But Mom wouldn't let me.
+          - say: Mom wanted to see CODA. It was really good but I prefer funny movies or scary movies.
+          #REVIEW: ADD - say: Have you seen it?   to discontinue and avoid follow up question around CODA
+
+      - label: HOST -  That's a nice hat you got there Lucy!
+        say: Oh thank you! Mom bought it for me at the festival store. It's my favorite color!
+      
+      - label: HOST - Doesn't notice hat
+        say: Mom bought me a super pretty beanie at the festival store. Do you like it?  #ALT
+
+      - label: HOST -  What else did you do?
+        say: There is this cafe where they played music all day. I don't remember what it was called. A S CAP or something #REVIEW: Resemble not working for A S CAP duplicate from below? should add cadence?
+
+      - label: HOST -  Did you do anything on the weekend?
+        say: We went up into the mountains early in the morning again before we drove home. Mom wanted to see the view one more time. I wish we could've rented skis again but it was very expensive.
+      
+      - label: HOST - Weekend [CONT.]  
+        say: We also built a snowman. Pig Puppet helped a lot.
+    
+      - label: HOST - Favorite places you visited? EQYPTIAN THEATRE
+        sequence:
+          - say: The egyptian theatre is so pretty when you see it with your own eyes. I've seen it only in the newspaper once. #REVIEW: try resemble again, weird pause before egyptian
+          - say: Mom took a picture. I overheard someone say to never look into the camera. But I don't know. Now I think it looks kind of weird?
+
+      - label: HOST - Favorite places? [CONT.] - ASCAP
+        sequence:
+          - say: There's a place where there's music all day, and musicians give talks! 
+            audiofile: VO_There_is_a_place_where_there_is_music_all_day_and_02.wav
+          - say: It's called...(pause, thinking for a moment) ASCAP Cafe!
+            audiofile: VO_Its_called_01.wav
+          - say: ASCAP Cafe!
+            audiofile: VO_ASCAP_cafe_01.wav
+          #REVIEW: remove - say: Here's a recording from this music cafe I told you about. I'm so glad I brought my tape recorder. PLAYS MUSIC FROM ASCAP CAFE
+      
+      - label: HOST -  Did you see anyone famous?
+        say: I think so. We saw a lot of people standing on the side of the street and waved and screamed at a nice lady. I didn't know her though. Mom said she is playing in a movie called Beetlejuice. The title sounds funny. #REVIEW: beetlejuice not working in resemble
+
+      - say: I was sooo busy. I talked to people all day about my movie script. It changed a lot but I think I got a lot better at writing. #REVIEW: resemble sooo  not working in resemble
+    
+######### LOOP ##  
+    - goto: SUNDANCE_EXPERIENCE
+
+############################
+############################
+- alias: BLOOD_GAZPACHO
+  note: Beat note 
+  sequence:
+    - choice:
+        - goto: BACK_HOME
+          tags: [$continue]
+
+        - label: HOST - What's it like to be the first virtual being to premiere a film at Sundance? #REVIEW: makes sens in blood gazpacho beat?
+          sequence:
+            - say: I'm not sure I understand, but it was my first time showing a film at sundance of course. #REVIEW: ignore virtual being, if possible avoid i dont understand at all times.
+            - say: I was so nervous, but then after I showed it I was on top of the world.
+            - say: Have you ever premiered a film at Sundance?
+
+        - label: HOST - What were some of the biggest challenges shooting your short film? #REVIEW fix resemble first line broken
+          sequence:
+            - say: We tried to learn how to make gazpacho when Dash suggested it, to make the set authentic but it was too many ingredients and mom needed the kitchen, so we ended up using canned soup instead. #REVIEW
+            - say: There were more characters than I had imagined originally, but luckily Pig is a moovee star, and he could take on more than one part, easy peasy. #REVIEW cut easy peasy, bad timing in resemble
+
+        - label: HOST - What made you decide to team up with festival-goers to finish your movie? What were some of your favorite ideas?
+          sequence:  #REVIEW: sequence probably too long. cut
+            - say: When I heard I'd be going to Sundance, I knew it was going to be a great place to meet other filmmakers like me.
+            - say: My teacher always tells us that your best work comes from working with friends. So that's what I knew I had to do.
+            - say: My favorite idea from my new friends at Sundance was making the story about Dracula and Van Hellsing meeting in a cafe. I thought that was a really great twist. #REVIEW meeting in a restaurant?
+            - say: We also changed the name. Before it was just called Dracula. Now it's Dracula...Blood Gassspacho, which is way funnier. #giggle #REVIEW use cadence lines?
+
+        - label: HOST - You played the role of Maggie in the film. What was it like working with a cast of puppets? Do puppets make good costars? 
+          sequence:
+            - say: Puppets make the BEST co stars. #REVIEW: not acknowledge generic puppets, but use all the pig puppet specific lines e.g. the way pig puppet portrait dracula was outstanding
+            - say: At first I was worried about playing Maggie. My best friend Pig Puppet is such a big movie star. So I didn't want to mess up in front of him. But he was really supportive and easy to work with.
+            - say: Directing him was a different story. He really liked to improvise, which I didn't like so much. But it still came out the way we wanted it to in the end. #REVIEW: there is a line for pig improvising
+        
+        - label: HOST - Can you tell us a bit about your experience and process making this movie? #REVIEW: missing response
+
+        - label: HOST - What inspired you to have this type of art direction?
+          sequence:
+            - say: I read somewhere Shadows are a reflection of life 02.wav
+              audiofile: VO_I_read_somewhere_Shadows_are_a_reflection_of_life_02.wav
+            - say: I see them dance somtimes on my wall when its windy outside 01.wav
+              audiofile: VO_I_see_them_dance_somtimes_on_my_wall_when_its_windy_outside_01.wav
+              
+        #- say: Does anybody know what expressionism is 01.wav
+          #audiofile: VO_Does_anybody_know_what_expressionism_is_01.wav
+
+        - label: HOST - Is the blood real?
+          sequence:
+            - say: Of course not!
+              audiofile: VO_Of_course_not_02.wav
+            - say: It's just jam. A LOT of it. 
+              audiofile: VO_Its_just_jam_a_lot_of_it_01.wav
+            - say: Oh well, Mom was pretty angry with me.
+              audiofile: VO_Oh_well_mom_was_pretty_angry_01.wav
+            - say: But she was making jam in the kitchen anyway! So I didn't really make it worse!
+              audiofile: VO_But_she_was_making_jam_in_01.wav
+
+        - label: HOST - What was the process for arranging the music in your film?
+          sequence: #- label: Soundtrack creation
+            - say: When I was making my movie, I went through and listened to our old records to decide what songs would be best in each scene. 
+              audiofile: VO_When_I_was_making_my_movie_I_went_through_and_listened_01.wav
+        
+            - say: My Dad also composed some new songs. 
+              audiofile: VO_My_dad_also_composed_some_new_songs_02.wav
+
+            - say: I got to tell him what I wanted a scene to sound and feel like and he was able to write the music and perform it!
+              audiofile: VO_I_got_to_tell_him_what_i_wanted_a_scene_to_sound_01.wav
+
+            # - say: I listen to all the records we have and take notes on which ones I like. #REVIEW: duplicate from first line?
+            #   audiofile: VO_I_listen_to_al_the_records_we_have_and_take_02.wav
+
+            # - say: Then I take my tape recorder to record them and when I watch the movie I listen to it and see if it feels right. #REVIEW: duplicate from first line?
+            #   audiofile: VO_Then_i_take_my_tape_recorder_to_record_them_02.wav
+
+            - say: I wish I could write my own music. #REVIEW: keep outside the sequence as potential follow up line?
+              audiofile: VO_I_wish_i_could_write_my_own_music_03.wav
+      
+        - label: HOST - What are other mediums you like to work with? #REVIEW: break up sequence as some feel redundant and too long in general?
+          # sequence:  #### Polaroids
+        - say: Oh, I love taking polaroids. I take pictures all the time! 
+          audiofile: VO_Oh_i_love_taking_polaroids_I_take_pictures_01.wav
+    
+        - say: When I look at them I remember what that moment was like. 
+          audiofile: VO_When_I_look_at_them_I_remember_01.wav
+
+        - say: When I see an interesting thing I need to take a picture of it, so I don't forget what was interesting about it. 
+          audiofile: VO_When_I_see_an_interesting_thing_I_need_01.wav
+
+        - say: When I show my brother he doesn't usually see it.
+          audiofile: VO_When_I_show_my_brother_he_doesnt_03.wav
+
+        - say: It's (emphasize) weird, because pictures don't have words on them I always have to explain it. People see them differently I think because they are different people. They see probably ALL kinds of other cool things.
+          audiofile: VO_Its_weird_03.wav
+
+        - label: HOST - What's the best filmmaking advice you received while making this movie?
+          sequence: ### Show don't tell
+            - say: During writer's workshop our homeroom teacher says, 'Show don't tell.' 
+              audiofile: VO_During_writers_workshop_our_homeroom_teacher_says_show_dont_tell_01.wav
+
+            - say: How do you even do that with typing?! I have to show with my polaroids! 
+              audiofile: VO_How_do_you_even_do_that_with_typing_Ihave_to_show_with_my_polaroids_01.wav
+
+            - say: And when I want to make a movie, I have to remember how it looks and sounds, and how to make the words show what I mean.
+              audiofile: VO_And_when_i_want_to_make_a_movie_I_have_to_remember_how_it_looks_and_sounds_01.wav
+
+######### LOOP ##   
+
+    - goto: BLOOD_GAZPACHO
+
+############################
+############################
+
+- alias: WRITING 
+  note: Beat note 
+  sequence:
+
+    - label: Choose Label. 
+      choice:
+
+      - goto: DIRECTING_CHARACTER 
+        tags: [$continue]
+
+      - say: At first, I thought I knew exactly what the movie should be about.
+        audiofile: VO_At_first_i_thought_i_know_exactly_what_the_movie_should_be_about_01.wav
+
+      - say: But when I asked people for their honest feedback 
+        audiofile: VO_But_when_i_asked_people_for_their_honest_feedback_01.wav
+
+      - say: I knew I had to put more work into the script.
+        audiofile: VO_I_knew_i_had_to_put_more_work_into_the_script_01.wav
+
+      - say: In the end, everything changed! Even the title! I didn't expect that.
+        audiofile: VO_In_the_end_everything_changed_even_the_title_I_didnt_expect_01.wav
+
+      - label: (HOST - What was the original title?)
+
+      - say: The title was Dracula.
+        audiofile: VO_The_title_was_dracula_01.wav
+
+      - say: But Dash and I liked Dracula - Blood Gazpacho better. *giggle*
+        audiofile: VO_But_Dash_and_I_liked_Dracula_01.wav
+
+      - say: Because it's so funny *giggle*
+        audiofile: VO_Because_its_so_funny_02.wav
+
+      - say: Also because that's what the story is all about! Blood Gazpacho and Blood Orange Cocktails
+        audiofile: VO_Also_because_thats_what_the_story_01.wav
+
+      - say: Someone said, writing is rewriting.
+        audiofile: VO_Someone_said_writing_is_rewriting_01.wav
+
+      - say: (Sigh) It's true.
+        audiofile: VO_Exhale_its_true_01.wav
+      - say: I had to take out a lot of ideas because I didn't know how to make them...
+        audiofile: VO_I_had_to_take_out_a_lot_of_Ideas_because_i_didnt_know_how_to_make_them_01.wav
+
+      - label: (HOST - Oh no. Can you give us an example?)
+
+      - say: Like making Dracula's castle explode!
+        audiofile: VO_Like_making_draculas_castle_explode_01.wav
+
+      - say: (ALT) Like exploding Dracula's castle!
+        audiofile: VO_Like_exploding_draculas_castle_01.wav
+
+      - say: Or sinking the ship he arrives on!
+        audiofile: VO_Or_sinking_the_ship_he_arrives_on_01.wav
+
+      # - say: And then when I was finally happy with the script and ready to shoot everything changed again!! #REVIEW: Missing audio file
+      #  audiofile: MISSING AUDIOFILE
+      - say: There were costumes missing.
+        audiofile: VO_There_were_costumes_missing_01.wav
+
+      - say: Dad didn't let me make a fire inside.
+        audiofile: VO_Dad_didnt_let_me_make_a_fire_inside_01.wav
+
+      - say: (Thinking) Annddd...well...(pausing)
+        audiofile: VO_Hmm_aaand_weeelll_01.wav
+
+      - say: It's a process!
+        audiofile: VO_Its_a_process_01.wav
+
+      - say: I'll never be completely happy with it, 
+        audiofile: VO_Ill_never_be_completely_happy_with_it_01.wav
+
+      - say: but you know what they say, the show must go on!
+        audiofile: VO_But_you_know_what_they_say_the_show_must_go_on_01.wav
+
+######### LOOP ##   
+    - goto: WRITING
+
+############################
+############################
+
+- alias: DIRECTING_CHARACTER 
+  note: Beat note 
+  sequence:
+
+    - label: Label 
+      choice:
+
+      - goto: BACK_HOME
+        tags: [$continue]
+
+      - say: The way Pig Puppet portrayed Dracula was outstanding. 
+        audiofile: VO_The_way_pig_puppet_portrait_dracula_was_outstanding_01.wav
+
+      - say: I wouldn't be surprised to see him at the Oscars again.
+        audiofile: VO_I_wouldnt_be_surprised_to_see_him_at_the_oscars_again_01.wav
+
+      - say: He also gave a lot of great notes on his lines.
+        audiofile: VO_He_also_gave_a_lot_of_great_notes_on_his_lines_01.wav
+
+      - say: Sometimes he improvised, which I didn't like.
+        audiofile: VO_Sometimes_improvised_which_i_didnt_like_01.wav
+
+      - say: I really do want to thank all of my new friends who gave feedback on my piece.
+        audiofile: VO_I_really_wanna_thank_all_my_new_friends_who_gave_feedback_on_my_piece_01.wav
+
+      - say: This film is something only (Emphasis) we could make...together!
+        audiofile: VO_This_film_is_something_only_we_can_make_together_01.wav
+
+      - say: What if someone else is writing our story right now? 
+        audiofile: VO_What_if_someone_else_is_writing_our_story_right_now_01.wav
+
+      - say: (Inquisitive, suspicious) Do you think someone is writing your story?
+        audiofile: VO_Do_you_think_someone_is_writing_your_story_01.wav
+
+
+
+      
+
+######### LOOP ##
+    - goto: DIRECTING_CHARACTER 
+
+
+############################
+############################
+
+- alias: BACK_HOME
+  note: Beat note 
+  sequence:
+    - choice:
+
+        - goto: GENERAL_QA
+          tags: [$continue]
+
+        #Back home
+        - label: HOST -  were you sad when the festival was over?
+          say: I wasn't sad when we drove home. I mean. Maybe a little bit. It was SO cool. But I also wanted to get back home to make my movie.
+
+        - say: Have you been to Sundance?
+
+        - label: HOST -  No I've never been. 
+          say: I hope you get to go one day! #REVIEW add   I   for better resemble
+
+        - label: HOST - Yes I've been there. It's something isn't it?
+          say: What was it like for you?
+
+        - label: HOST -  How is it being back home again?
+          say: It's good to be home, but I definitely miss the hot cocoas from the Pink Elephant. Maybe I can convince Pig to become a Bar-easta. #REVIEW:  Bar easta  not great
+
+        - label: Monologue - About the drive home
+          sequence:
+            - say: Why is the way home soooo much longer then the way there? I think it's because there is nothing new to look at.
+            - say: Sometimes I'd blink my eyes or click my teeth everytime we passed a telephone pole. Just to stay awake. 
+            # REVIEW: could cut the rest
+            # - say: Mom wanted me to talk to her so she didn't fall asleep. 
+            # - say: She says she can't wait for me to be old enough to drive, so we can share the driving responsibilities. 
+            # - say: Then she took it back when I asked how fast the car could go...
+
+        - say: I rehearsed a lot with Pig. We were focusing on his body language since it's a silent movie.
+
+        - label: HOST -  Did people like your movie?
+          say: Everybody loved it. You won't believe how many people came to see it!
+
+        - label: HOST -  How many?
+          say: A hundred! I was super nervous. But everything worked out in the end. 
+       
+        - label: HOST -  How was it finally getting to work on your film? #REVIEW: potentiall add post production is so much work cadence line
+          sequence:
+            - say: I never imagined I would be this tired from creating art. 
+            - say: It doesn't seem like something you would get tired from. 
+            - say: It's not like shoveling snow or digging the fence holes in the backyard. But all I want to do now is sleep.
+
+######### LOOP ##   
+    - goto: BACK_HOME
+
+############################
+############################
+
+- alias: GENERAL_QA
+  note: Beat note 
+  sequence:
+    - choice:
+
+      - goto: OUTRO
+        tags: [$continue]
+
+      - label: HOST - Where do you find your inspiration? #### From Imagination To Screen
+        sequence:
+          - say: When I make movies I want to take what's in my head and make it alive, and remembering all the parts can be hard. I have to take my time to keep the pieces safe.
+            audiofile: VO_When_i_make_movies_I_want_to_take_whats_in_my_head_01.wav
+          - say: There are so many things I dream about even during the day. *giggle* The dreams are hard to remember because you can't take polaroids of them. 
+            audiofile: VO_There_are_so_many_things_I_dream_about_even_01.wav
+          - say: I read somewhere that you need to write things down as they come to your mind. I've been trying! but I'm a slow writer. 
+            audiofile: VO_I_read_somewhere_that_you_need_to_write_01.wav
+          - say: Drawing is faster, but it doesn't usually look so great.
+            audiofile: VO_Drawing_is_faster_but_it_doesnt_usually_look_so_great_01.wav
+
+      - label: HOST - What's your favorite movie?
+        sequence:
+          - say: There was a scene in a movie with a little kid on a bicycle with an alien.
+            audiofile: VO_There_was_a_scene_in_a_movie_with_a_little_kid_02.wav
+
+          - say:  All of a sudden the alien makes the kid's bike fly and the music just goes crazy. It EXPLODED! I got goosebumps! I didn't expect that feeling! Has anyone else had that happen to them?
+            audiofile: VO_All_of_a_sudden_the_alien_makes_the_kids_bike_fly_and_the_music_just_goes_crazy_02.wav
+         
+      - label: HOST - A lot of artists have been affected by the quarantine and remote work right now. How has this affected you and your creative process?
+        sequence:
+          - say: What you said makes me think...
+            audiofile: VO_What_you_said_makes_01.wav
+            ## Collaboration w/ her brother
+          - say: One time there was this rain storm and we couldn't go outside. 
+            audiofile: VO_One_time_there_was_this_rainstorm_and_we_couldnt_go_outside_01.wav
+          - say: So my brother and I had to make up games to play inside.
+            audiofile: VO_so_my_brother_and_i_had_to_make_up_games_01.wav
+          - say: Normally we annoy each other, 
+            audiofile: VO_Normally_we_annoy_each_other_01.wav
+          - say: but I think that day we both needed each other or else we would have been bored!
+            audiofile: VO_But_I_think_that_day_we_02.wav
+          # REVIEW: break here, the rest feels like a response to a follow up question
+          - say: We put a bunch of lights on the floor, so the living room looked like lava! 
+            audiofile: VO_We_put_a_bunch_of_lights_on_the_floor_02.wav
+          - say: No one was allowed to touch it, and we chased each other all day.
+            audiofile: VO_No_one_was_allowed_to_touch_it_and_we_chased_each_other_all_day_02.wav
+
+      - label: HOST - how can we keep in touch?
+        # sequence: #REVIEW disabled sequence
+      - say: You can send me a message over the computer 01.wav
+        audiofile: VO_You_can_send_me_a_message_over_the_computer_01.wav
+
+      - say: My account is Lucy and Pig Puppet
+        audiofile: VO_My_account_is_lucy_and_pig_puppet_02.wav
+        tags: [$important, account, touch, lucy and pig puppet]
+
+      - say: Or write me a letter 01.wav
+        audiofile: VO_Or_write_me_a_letter_01.wav
+
+      - say: Oh I always wanted a telegram 01.wav
+        audiofile: VO_Oh_I_always_wanted_a_telegram_01.wav
+
+      - say: Do you know morse code 01.wav
+        audiofile: VO_Do_you_know_morse_code_01.wav
+
+      - say: I m working on it 01.wav
+        audiofile: VO_I_m_working_on_it_01.wav
+
+
+######### LOOP ##   
+
+    - goto: GENERAL_QA
+
+############################
+############################
+- alias: OUTRO 
+  note: Say Goodbye 
+  sequence:
+    - label: Choose Label. 
+      choice:
+        - label: HOST - Any final words you want to share with anyone who is watching?
+          say: I really do want to thank all of my new friends who gave feedback on my piece.
+          audiofile: VO_I_really_wanna_thank_all_my_new_friends_who_gave_feedback_on_my_piece_01.wav
+
+        - say: Thanks for inviting me 01.wav
+          audiofile: VO_Thanks_for_inviting_me_01.wav
+
+        - label: HOST - Goodbye Lucy!
+          note: Generic assist goodbye!
+
+
+
+######### LOOP ##   
+    - goto: OUTRO
+
+############################
+############################
+- alias: TANGENTS 
+  note: Beat note 
+  sequence:
+    - label: Choose Label. 
+      choice:
+
+        - goto: INDEX
+          tags: [$continue]
+
+######### LOOP ##   
+    - goto: TANGENTS
+
+############################
+############################
+
+
+- alias: DRACULA_FALLBACKS
+  note: Beat note 
+  sequence:
+    - label: Label
+      choice: 
+
+      - say: I can't share all my secrets
+        audiofile: VO_I_cant_share_all_my_secrets_01.wav
+
+      - say: It was just intuition
+        audiofile: VO_It_was_just_intuition_01.wav
+
+      - say: I read Dracula last Halloween.
+        audiofile: VO_I_read_dracula_last_halloween_01.wav
+
+      - say: Well that was Hannah's idea
+        audiofile: VO_Well_that_was_hannahs_idea_01.wav
+
+      - say: Dash really liked the title. One original working title was #REVIEW: good line for any question about the collaboration
+        audiofile: VO_Dash_really_liked_the_title_One_original_02.wav
+
+      - label: <RETURN TO INDEX>
+        goto: INDEX
+        tags: [$continue]
+
+      - goto: TANGENTS
+        tags: [$continue]
+
+######### LOOP ##
+    - goto: DRACULA_FALLBACKS
+
+
+############################
+############################
+
+
+####################################
+#END  OF POST SUNDANCE EP ############### 
+####################################
+
+
+###BELOW ARE POSSIBLE LINES TO COPY AND PASTE IN###
+############################
+############################
+
+- alias: POSSIBLE_LINES 
+  note: Beat note 
+  sequence:
+    - label: Choose Label. 
+      choice:
+
+        - label: Music at my house
+        - say: (Excited) You can always hear music in my house, my Dad plays the tuba in the symphony.
+          audiofile: VO_You_can_always_hear_music_at_my_house_dad_plays_01.wav 
+        
+
+        - label: Knowledge Base - I like Dad's music a lot
+        - say: I like Dad's music a lot!
+          audiofile: VO_I_like_dads_music_a_lot_01.wav
+        - label: Friends Perspective on Music
+        - say: My friends from school think Dad's music boring, but I think that it's magical! It's like seeing a movie with your ears!
+          audiofile: VO_My_friends_from_school_thing_dads_music_is_boring_but_i_01.wav
+        - label: Music is like seeing a movie with your ears
+        - say: Music is like seeing a movie with your ears!
+          audiofile: VO_Music_is_like_seeing_a_movie_with_your_ears_01.wav
+
+        - label: Misc. Intro Lines
+        - say: I'm eight-and-a-half-years-old. A lot of people say I'm grown-up for my age.
+          audiofile: VO_Im_eight_Grown_01.wav
+
+
+        #Hmmm Thinking
+        - say: Hmmm...
+          audiofile: VO_Hmm_01.wav
+        - say: Hmmm... that's a good question!
+          audiofile: VO_Hm_thats_a_good_question_01.wav
+
+        - say: It's scary even though I don't usually like scary movies. But I think it's great. My friend helped me make it. He plays the  vampire!
+          audiofile: VO_Its_scary_even_though_01.wav
+
+        - say: Wait, I have more to say!
+          audiofile: VO_Wait_I_have_one_more_01.wav  #REVIEW: missing, wrong recorded. i-have-ONE-more  -- one wasnt in the script, both takes
+
+        - say: Ooh ooh ooh...that makes me think...!
+          audiofile: VO_Ohh_ooh_that_makes_me_thinkg_02.wav
+        - say: About my memories with music!
+          audiofile: VO_About_my_memories_with_music_01.wav
+
+        - say: About my favorite movie soundtracks!
+          audiofile: VO_About_my_favorite_movie_soundtracks_01.wav
+
+        - say: About making my own movie with friends!
+          audiofile: VO_About_making_my_own_movie_with_friends_02.wav
+        - label: choice 1 
+
+        - label: Dad taught me that every instrument in his symphony has its own voice...
+          say: Dad taught me that every instrument in his symphony has its own voice and that whether they're alone or playing all together they can use those voices to tell an amazing story.
+          audiofile: VO_Dad_taught_me_that_every_instrument_in_his_symphony_has_01.wav
+
+        - label: I think that's how it works with the music in movies.
+          say: I think that's how it works with the music in movies.
+          audiofile: VO_I_think_thats_how_it_works_with_the_music_in_movies_01.wav
+
+        - label: It's like the pictures tell us one part of the story and the music tells us another part. 
+          say: It's like the pictures tell us one part of the story and the music tells us another part.
+          audiofile: VO_Its_like_the_picture_tells_us_one_part_of_the_story_and_the_music_01.wav
+        
+        - label: Sometimes I watch a movie and don't notice the music at all. 
+          say: Sometimes I watch a movie and don't notice the music at all.
+          audiofile: VO_Sometimes_Im_watching_a_movie_and_02.wav
+
+        - label: But other times I hear something and when I close my eyes I know how the movie feels.
+          say: But other times I hear something and when I close my eyes I know how the movie feels. 
+          audiofile: VO_But_other_times_I_hear_something_and_when_I_01.wav
+
+  
+        - label: Memory - I can listen to the important music later on and remember what was happening in the scene and feel it all again.
+          say: I can listen to the important music later on and remember what was happening in the scene and feel it all again.
+          audiofile: VO_I_can_listen_to_the_important_music_later_on_and_remember_02.wav  
+        - label: Memory ALT - After watching a movie, when I hear the music again, I can really remember the scenes in my head.
+          say: After watching a movie, when I hear the music again, I can really remember the scenes in my head.
+          audiofile: VO_After_watching_the_movie_when_i_hear_the_music_again_I_can_01.wav
+        - label: Memory Defense - It's all important I guess, but there are some parts that put you right back into the movie.
+          say: It's all important I guess, but there are some parts that put you right back into the movie.
+          audiofile: VO_Its_all_important_i_guess_but_there_are_some_parts_that_01.wav
+
+        - label: Music inside every moment
+        - say: I think there's music inside every moment, and when we make movies, we're trying to make it so everyone else can hear it, too.
+          audiofile: VO_I_think_there_is_music_in_every_moment_and_when_we_02.wav
+        - label: Basement 
+        - say: When I have to go down to the basement, there's screechy and spooky music right before I turn the lights out. 
+          audiofile: VO_When_I_have_to_go_down_to_the_basement_theres_screechy_04.wav
+        - say: There's something loud about how the room goes dark all of a sudden. 
+          audiofile: VO_Theres_something_loud_about_how_the_room_goes_03.wav
+        - say: It makes me want to run up the stairs as fast as I can. 
+          audiofile: VO_It_makes_me_wanna_run_up_the_stairs_as_01.wav
+        - say: It doesn't look scary from the outside, but if you were in my head... and you heard that music, you'd know what it felt like to switch the lights off down there, just like in a movie.
+          audiofile: VO_It_doesn_look_scary_from_the_outside_but_if_02.wav
+        - label: Attic
+        - say: If you saw me in my attic, it might look scary to be there, but if I put on a record the scariness goes away.
+          audiofile: VO_If_you_saw_me_in_my_attic_it_might_02.wav
+        - say: When I share old records with my friends over walkie talkie, they know it's not scary in the attic as soon as they hear the music.
+          audiofile: VO_When_i_share_records_with_my_friends_over_walkie_talkie_they_know_its_02.wav
+        - label: Contrast/Style
+        - say: I once heard someone say that there's no bad weather, only bad clothes. I feel the same with music and movies.
+          audiofile: VO_I_once_heard_someone_say_that_theres_no_bad_weather_only_01.wav 
+        - label: Contrast/Style Follow-up
+        - say: It reminds me of style, if it matches perfectly it looks good and if it contrasts it looks good. But if you wear a bright green shirt with dark green pants it can clash.
+          audiofile: VO_It_reminds_me_of_a_style_if_it_matches_01.wav #REVIEW: misspoken - a style
+        - label: ALT Contrast/Style Follow-Up
+        - say: When you go out into the cold weather and you have the wrong jacket on, you can be super cold, but with a puffy coat you can spend all day in the snow! I guess a movie can be like the snowy day, and the music is like the coat you choose.
+          audiofile: VO_When_you_got_out_into_the_cold_weather_02.wav 
+        - label: First song
+        - say: The first song of a movie is the most important because even if it's not the best song, it's the song that takes you there. 
+          audiofile: VO_The_first_song_of_a_movie_is_the_most_01.wav
+        - say: I love it when a movie starts with music. It's so much easier to get lost in it!
+          audiofile: VO_I_love_it_when_a_movie_starts_with_music_its_so_much_easier_to_01.wav
+        - label: Deception
+        - say: I don't like it when music lies in movies.
+          audiofile: VO_I_don_t_like_it_when_music_lies_in_movies_03.wav
+        - label: Deception Follow-up
+        - say: Sometimes in scary movies, the music makes you think something scary is about to happen, but then it doesn't... and a mouse squeaks out.
+          audiofile: VO_Sometimes_in_scary_movies_the_music_makes_you_think_01.wav
+
+
+        - label: Setting images to music
+        - say: I notice when I play different music looking at the polaroids I've taken, or watching some of the stuff I've seen with my camcorder, the music can tell you it's okay to feel a certain way about it.
+          audiofile: VO_I_notice_when_I_Play_different_music_looking_at_01.wav
+        - say: When I look at my polaroids and listen to music, it changes how I feel about them. Some songs make Mom look sad even though she's smiling.
+          audiofile: VO_When_i_look_at_my_polaroids_and_02.wav
+
+        - label: Dad has amazing ideas
+        - say: I ask my Dad to score my movies sometimes and he always has such amazing ideas.
+          audiofile: VO_I_ask_my_dad_to_score_my_movies_sometimes_and_he_always_02.wav
+        - label: Designing music with Dad
+        - say: I've been working on my own film and it was so fun designing the music. Dad helped, but I got to make the big decisions.
+          audiofile: VO_Ive_been_making_my_own_film_and_it_was_02.wav
+        - say: I don't ever want to change anything he does.
+          audiofile: VO_I_dont_ever_want_to_change_anything_he_does_02.wav
+        - label: Instruments as their own characters
+        - say: Dad tells me to think of instruments as characters, watching the movie right alongside you. But you have to remember... they already know what's going to happen! AND they have different characters and parts that they like, or don't like...
+          audiofile: VO_Dad_tells_me_to_think_of_instruments_as_characters_watch_03.wav
+        - say: ... So when you hear them play, you're hearing the way that they f eel, and they can tell you little secrets that only make sense when you know as much as they do.
+          audiofile: VO_So_when_you_hear_them_play_youre_hearing_the_way_02.wav
+        
+
+        - label: More about the Screening
+        - say: I met some cool people at the festival last week. They helped me write the script for it.
+          audiofile: VO_I_met_some_cool_people_at_the_festival_last_week_02.wav #REVIEW: useful line for interview intro
+          tags: [screening]
+ 
+        - say: It's a surprise! I don't want to spoil anything. 
+          audiofile: VO_Its_a_surprise_I_dont_wanna_spoil_anything_02.wav
+          tags: [screening]
+        - say: Okay well it's about a vampire. But that's all I'm going to say!
+          audiofile: VO_Okay_well_its_about_a_vampire_but_thats_02.wav
+          tags: [screening]
+
+        - label: Listened to a soundtrack before watching a movie?
+        - say: Have you ever listened to a soundtrack before watching a movie? The movie's always totally different than what you expect.
+          audiofile: VO_Have_you_ever_listened_to_a_soundtrack_before_02.wav
+          tags: [tangent]
+        - label: Music like a fan at a match
+        - say: My brother loves to watch wrestling... and in movies, music is like a fan at a wrestling match, shouting in the background... they're a part of it, but they're also not.
+          audiofile: VO_My_brother_loves_to_watch_wrestling_and_in_movies_01.wav
+          tags: [tangent]
+        - label: I like to play songs that are allegro. Today I'm more andante.
+        - say: I like to play songs that are allegro. Today I'm more andante. That's walking speed.
+          audiofile: VO_I_like_to_play_songs_that_are_allegro_02.wav
+
+        - label: Sound effects
+        - say: There was this one  time I flapped a big piece of paper in front of the walkie talkie and tricked my friend into thinking it was a bat!
+          audiofile: VO_There_was_this_one_time_I_flapped_a_big_piece_of_03.wav
+          tags: [tangent]
+        
+        - say: I thought that was a really good point!    
+          audiofile: VO_I_thought_that_was_a_01.wav
+          tags: [mod]
+
+
+        - say: Oh! What do I like to do? I love to draw, and I really want to make movies. 
+          audiofile: VO_Intro_p4_Oh_what_do_I_like_01.wav
+
+        
+        - label: Misc. Intro Lines
+        - say: I'm eight-and-a-half-years-old. A lot of people say I'm grown-up for my age.
+          audiofile: VO_Im_eight_Grown_01.wav
+
+        - say: I'm eight-and-a-half-years-old, and Nana says I'm wise beyond my years!
+          audiofile: VO_Im_eight_Nana_01.wav
+
+
+        #Hmmm Thinking
+        - say: Hmmm...
+          audiofile: VO_Hmm_01.wav
+        - say: Hmmm... that's a good question!
+          audiofile: VO_Hm_thats_a_good_question_01.wav
+
+        - say: What else do you want to know?
+          audiofile: VO_What_else_do_you_01.wav
+
+        - say: It's scary even though I don't usually like scary movies. But I think it's great. My friend helped me make it. He plays the  vampire!
+          audiofile: VO_Its_scary_even_though_01.wav
+
+        - say: Wait, I have more to say!
+          audiofile: VO_Wait_I_have_one_more_01.wav  #REVIEW: missing, wrong recorded. i-have-ONE-more  -- one wasnt in the script, both takes
+
+        - say: What you said makes me think...
+          audiofile: VO_What_you_said_makes_01.wav
+
+        - say: I've been thinking about...
+          audiofile: VO_Ive_been_thinking_about_01.wav
+
+        - say: The question about (pause, remembering word) platforms...makes me think about the pictures I take, and talking to my friends on the walkie talkie, and the computer.
+          audiofile: VO_The_question_about_platforms_02.wav
+
+        - say: Maybe even the ways I use my art supplies and all the stuff I've been finding in the attic.
+          audiofile: VO_Maybe_even_the_ways_01.wav
+
+        - label: COMPLETE THOUGHT I understand what different platforms are...
+          sequence:
+          - say: I think I understand what different platforms are...
+            audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p1.wav
+
+          - say: It's like when I use my camera and walkie talkie and computer and record player!
+            audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p2.wav
+
+          - say: And sometimes the tape player and the electric piano too.
+            audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p3.wav
+
+
+        - label: School friends at recess
+        - say: I love working with friends!
+          audiofile: VO_I_love_working_with_friends_01.wav
+          tags: [tangent]
+        - say: At recess we come up with impossible missions that we only have thirty-minutes to complete! Like building a fort! 
+          audiofile: VO_at_recess_we_come_up_with_impossible_missions_that_we_01.wav
+          tags: [tangent]
+
+        - label: It helps when we each have a job to do...
+        - say: It helps when we each have a job to do.
+          audiofile: VO_It_helps_when_we_each_have_a_job_to_do_01.wav
+          tags: [tangent]
+        - say: That way everything gets done quicker. 
+          audiofile: VO_That_way_everything_gets_done_quicker_02.wav
+          tags: [tangent]
+        
+        - label: I told my mom and she said we were delergating...
+        - say: I told my mom and she said we were del-er-gate-ing. 
+          audiofile: VO_I_told_my_mom_and_she_said_we_where_del_e_gating_01.wav
+          tags: [tangent]
+        - say: I'm not sure what that is, but it seems to work!
+          audiofile: VO_Im_not_sure_what_that_is_but_it_seems_to_work_01.wav
+          tags: [tangent]
+
+        - label: Snow
+        - say: Did you see all the snow today?! 
+          audiofile: VO_Did_you_see_all_the_snow_today_01.wav
+          tags: [tangent]
+        - say: I can't wait to make a snowman later if anyone wants to join me...
+          audiofile: VO_I_can_wait_to_make_a_snowman_later_if_anyone_wants_01.wav
+          tags: [tangent]
+
+
+        - label: Art where there 'shouldn't' be art
+        - say: My favorite is making art out of things that weren't art before.
+          audiofile: VO_My_favorite_is_making_art_out_of_things_that_werent_art_before_01.wav
+          tags: [tangent]
+        - say: One time I used my paints to draw a big monster face on a trash can outside. 
+          audiofile: VO_One_time_I_used_my_paints_to_draw_a_big_monster_face_01.wav
+          tags: [tangent]
+        - say: I thought Mom and Dad would be mad, but they actually liked it!
+          audiofile: VO_I_thought_mom_and_dad_would_be_mad_but_they_actually_liked_it_01.wav
+          tags: [tangent]
+
+
+        - label: Creative activities (phony-graphs)
+        - say: Our favorite is phony-graphs.
+          audiofile: VO_Our_favorite_is_phonygraphs_01.wav
+          tags: [tangent]
+        - say: We tell each other funny things to draw. Like a camel in ballet slippers.
+          audiofile: VO_We_tell_each_other_funny_things_to_draw_like_a_camel_with_02.wav
+          tags: [tangent]
+        - say: Then we get our parents to mail the pictures to each other so we can see.
+          audiofile: VO_Then_we_get_our_parents_to_mail_the_pictures_to_each_other_so_01.wav
+          tags: [tangent]
+        - say: Whenever I get a new picture I can't stop laughing!
+          audiofile: VO_Whenever_i_get_a_new_picture_i_cant_stop_laughing_01.wav
+          tags: [tangent]
+        - say: I hang them all in my room and they remind me of her.
+          audiofile: VO_I_hang_them_all_in_my_room_and_they_remind_me_of_her_01.wav
+          tags: [tangent]
+
+        - label: Moon imagery
+        - say: I watch the moon when it's alone in the empty sky and follow it, taking pictures.
+          audiofile: VO_I_watch_the_moon_when_its_alone_in_the_empty_01.wav
+          tags: [tangent]
+
+
+
+#######################
+#SUNDANCE DRACULA SCREENING  ############### 
+#######################
+
+
+      
+        - label: (HOST - What's the title of your movie?)
+          say: It's called,  Dracula - Blood Gazpacho
+          audiofile: VO_Its_called_Dracula_Blood_03.wav
+
+        - say: Oh wait, maybe one thing. 
+          audiofile: VO_Oh_wait_maybe_one_thing_01.wav
+      
+        - say: This might be too scary for little kids! 
+          audiofile: VO_This_might_be_too_scary_for_little_kids_01.wav
+        - say: So if you're a little kid, close your eyes now...And your ears. Music can be scary too!
+          audiofile: VO_Soo_if_you_re_a_little_kid_close_your_eyes_now_and_your_music_can_be_scary_01.wav
+        - say: It's more funny than scary. 
+          audiofile: VO_Its_more_funny_than_scary_01.wav
+        - say: It has a loooot of blood in it
+          audiofile: VO_It_has_a_lot_of_blood_in_it_01.wav
+        - say: So this is not for little kids or little pigs.
+          audiofile: VO_So_its_not_for_little_kids_or_01.wav
+        - say: Let me know if I need to turn up the volume.
+          audiofile: VO_Let_me_know_if_i_need_to_turn_up_the_volume_01.wav
+        - say: (nervous) Alright, oh my gosh. I hope you like it.
+          audiofile: VO_Alright_oh_my_gosh_i_hope_you_like_it_01.wav
+
+        - say: Sometimes Pig was behind the camera.
+          audiofile: VO_Sometimes_pig_was_behind_the_01.wav
+
+######### LOOP ##   
+    - goto: POSSIBLE_LINES
+
+## ADD TO GENERIC ASSIST say: I thought that was a really good point!    
+          #audiofile: VO_I_thought_that_was_a_01.wav
+          #tags: [mod]
+
+
+############################
+############################
+
+- alias: CREDITS 
+  note: Beat note 
+  sequence:
+    - label: Choose Label. 
+      choice:
+
+        - goto: WRITING
+          tags: [$continue]
+          
+        - say: I would like to say thank you to everyone who helped me write the script! 
+          audiofile: VO_I_would_like_to_say_thank_you_to_everyone_whoe_helped_me_write_the_script_01.wav
+
+        - say: Oh! And thanks to Abi!
+          audiofile: VO_Oh_and_thank_you_to_Abi_03.wav
+
+        - say: Thanks for having me!
+          audiofile: VO_Thanks_for_having_me_01.wav
+
+        #- say: Dash helped me so much developing this story. 
+          #audiofile:
+
+        #- say: Dash and Hannah both helped me so much developing this story.
+        - say: Dash and Hannah helped me so much
+          audiofile: VO_Dash_and_Hannah_helped_me_so_much_01.wav
+
+        - say: Hanna was so great
+          audiofile: VO_Hanna_was_so_great_01.wav
+
+        - say: Amanda too
+          audiofile: VO_Amanda_too_01.wav
+        #- say: She had so many cool ideas.
+          #audiofile: 
+
+        #- say: He had so many cool ideas.
+          #audiofile: 
+
+        - say: They had so many cool ideas
+          audiofile: VO_They_had_so_many_cool_ideas_01.wav
+
+        - say: I couldn't have made this without 
+          audiofile: VO_I_couldnt_have_made_this_without_01.wav
+
+        - say: She helped me finalize it 
+          audiofile: VO_She_helped_me_finalize_it_01.wav
+
+        - say: (ALT) Thanks for inviting me!
+          audiofile: VO_Thanks_for_inviting_me_01.wav
+
+
+    
+######### LOOP ##
+    - goto: CREDITS 
+
+
+############################
+############################
+
+
+############################
+############################
+
+
+
+
+
+- alias: END
+  note: Beat note 
+  sequence:
+    - label: END Glitch
+      choice: 
+
+      - say: Oh no. I think my brother is using the computer. 
+        audiofile: VO_Oh_no_I_think_my_brother_is_using_the_computer_01.wav
+      - say: I can't hear anything anymore.
+        audiofile: VO_I_cant_hear_anything_anymore_01.wav
+
+      #- to brother: Don't touch the camera!
+      #- Brother: No lucy you 
+
+######### LOOP ##
+    - goto: END 
+####################################
+#END  ############### 
+####################################
+
+
+
+
+####################################
+#CADENCE Library  ############### 
+####################################
+
+
+# - alias: CADENCE
+#   note: Beat note 
+#   sequence:
+#     - label: LOGOFF
+#       choice:
+
+
+        # - say: VO_About_making_my_own_movie_with_friends_01.wav
+        #   audiofile: VO_About_making_my_own_movie_with_friends_02.wav
+        # - say: VO_About_my_favorite_movie_soundtracks_01.wav
+        #   audiofile: VO_About_my_favorite_movie_soundtracks_02.wav
+        # - say: VO_About_my_memories_with_music_01.wav
+        #   audiofile: VO_About_my_memories_with_music_02.wav
+        # - say: VO_After_watching_the_movie_when_i_hear_the_music_again_I_can_01.wav
+        #   audiofile: VO_After_watching_the_movie_when_i_hear_the_music_again_I_can_02.wav
+        # - say: VO_All_of_a_sudden_the_alien_makes_the_kids_bike_fly_and_the_music_just_goes_crazy_01.wav
+        #   audiofile: VO_All_of_a_sudden_the_alien_makes_the_kids_bike_fly_and_the_music_just_goes_crazy_02.wav
+        # - say: VO_ASCAP_cafe_01.wav
+        #   audiofile: VO_ASCAP_cafe_02.wav
+        # - say: VO_But_other_times_I_hear_something_and_when_I_01.wav
+        #   audiofile: VO_Close_to_mainstreet_01.wav
+        # - say: VO_Come_to_my_screening_tomorrow_01.wav
+        #   audiofile: VO_Come_to_my_screening_tomorrow_02.wav
+        # - say: VO_Come_to_my_screening_tomorrow_03.wav
+        #   audiofile: VO_Dad_taught_me_that_every_instrument_in_his_symphony_has_01.wav
+        # - say: VO_Dad_tells_me_to_think_of_instruments_as_characters_watch_01.wav
+        #   audiofile: VO_Dad_tells_me_to_think_of_instruments_as_characters_watch_02.wav
+        # - say: VO_Dad_tells_me_to_think_of_instruments_as_characters_watch_03.wav
+        #   audiofile: VO_Good_to_see_you_01.wav
+        # - say: VO_Good_to_see_you_02.wav
+        #   audiofile: VO_Have_you_ever_listened_to_a_soundtrack_before_01.wav
+        # - say: VO_Have_you_ever_listened_to_a_soundtrack_before_02.wav
+        #   audiofile: VO_Hey_does_anyone_have_a_radio_I_can_borrow_01.wav
+        # - say: VO_Hey_does_anyone_have_a_radio_I_can_borrow_02.wav
+        #   audiofile: VO_If_anyone_wants_to_see_it_01.wav
+        # - say: VO_If_anyone_wants_to_see_it_02.wav
+        #   audiofile: VO_If_anyone_wants_to_see_the_movie_I_made_with_new_friends_01.wav
+        # - say: VO_If_anyone_wants_to_see_the_movie_I_made_with_new_friends_02.wav
+        #   audiofile: VO_If_anyone_wants_to_see_the_movie_I_made_with_new_friends_and_dads_help_01.wav
+        # - say: VO_If_anyone_wants_to_see_the_movie_I_made_with_new_friends_and_dads_help_02.wav
+        #   audiofile: VO_If_you_saw_me_in_my_attic_it_might_01.wav
+        # - say: VO_If_you_saw_me_in_my_attic_it_might_02.wav
+        #   audiofile: VO_Im_screening_the_short_film_Ive_been_01.wav
+        # - say: VO_Im_sorry_I_dont_really_remember_meeting_I_was_01.wav
+        #   audiofile: VO_Im_sorry_I_dont_really_remember_meeting_I_was_02.wav
+        # - say: VO_Its_all_important_i_guess_but_there_are_some_parts_that_01.wav
+        #   audiofile: VO_Its_all_important_i_guess_but_there_are_some_parts_that_02.wav
+        # - say: VO_Its_a_surprise_I_dont_wanna_spoil_anything_01.wav
+        #   audiofile: VO_Its_a_surprise_I_dont_wanna_spoil_anything_02.wav
+        # - say: VO_Its_called_01.wav
+        #   audiofile: VO_Its_called_01_misspoken.wav
+        # - say: VO_Its_like_seeing_a_movie_with_your_ears_01.wav
+        #   audiofile: VO_Its_like_the_picture_tells_us_one_part_of_the_story_and_the_music_01.wav
+        # - say: VO_Its_so_cool_because_i_can_just_tell_him_what_I_want_and_01.wav
+        #   audiofile: VO_Its_so_cool_because_i_can_just_tell_him_what_I_want_and_02.wav
+        # - say: VO_It_doesn_look_scary_from_the_outside_but_if_01.wav
+        #   audiofile: VO_It_doesn_look_scary_from_the_outside_but_if_02.wav
+        # - say: VO_It_makes_me_wanna_run_up_the_stairs_as_01.wav
+        #   audiofile: VO_It_makes_me_wanna_run_up_the_stairs_as_02.wav
+        # - say: VO_It_reminds_me_of_a_style_if_it_matches_01.wav
+        #   audiofile: VO_Ive_been_making_my_own_film_and_it_was_01.wav
+        # - say: VO_Ive_been_making_my_own_film_and_it_was_02.wav
+        #   audiofile: VO_I_ask_my_dad_to_score_my_movies_sometimes_and_he_always_01.wav
+        # - say: VO_I_ask_my_dad_to_score_my_movies_sometimes_and_he_always_02.wav
+        #   audiofile: VO_I_can_listen_to_the_important_music_later_on_and_remember_02.wav
+        # - say: VO_I_dont_ever_want_to_change_anything_he_does_01.wav
+        #   audiofile: VO_I_dont_ever_want_to_change_anything_he_does_02.wav
+        # - say: VO_I_don_t_get_it_when_music_lies_in_movies_01_misspoken.wav
+        #   audiofile: VO_I_don_t_get_it_when_music_lies_in_movies_02_bgnoise.wav
+        # - say: VO_I_don_t_like_it_when_music_lies_in_movies_03.wav
+        #   audiofile: VO_I_don_t_like_it_when_music_lies_in_movies_04.wav
+        # - say: VO_I_got_to_tell_him_what_i_wanted_a_scene_to_sound_01.wav
+        #   audiofile: VO_I_got_to_tell_him_what_i_wanted_a_scene_to_sound_02.wav
+        # - say: VO_I_like_dads_music_a_lot_01.wav
+        #   audiofile: VO_I_like_dads_music_a_lot_02.wav
+        # - say: VO_I_like_dads_music_a_lot_03.wav
+        #   audiofile: VO_I_like_dads_music_a_lot_04.wav
+        # - say: VO_I_like_to_play_songs_that_are_allegro_01.wav
+        #   audiofile: VO_I_like_to_play_songs_that_are_allegro_02.wav
+        # - say: VO_I_listen_to_al_the_records_we_have_and_take_01.wav
+        #   audiofile: VO_I_listen_to_al_the_records_we_have_and_take_02.wav
+        # - say: VO_I_love_it_when_a_movie_starts_with_music_its_so_much_easier_to_01.wav
+        #   audiofile: VO_I_love_it_when_a_movie_starts_with_music_its_so_much_easier_to_02.wav
+        # - say: VO_I_met_some_cool_people_at_the_festival_last_week_01.wav
+        #   audiofile: VO_I_met_some_cool_people_at_the_festival_last_week_02.wav
+        # - say: VO_I_notice_when_I_Play_different_music_looking_at_01.wav
+        #   audiofile: VO_I_notice_when_I_Play_different_music_looking_at_02_p1.wav
+        # - say: VO_I_notice_when_I_Play_different_music_looking_at_02_p2.wav
+        #   audiofile: VO_I_once_heard_someone_say_that_theres_no_bad_weather_only_01.wav
+        # - say: VO_I_once_heard_someone_say_that_theres_no_bad_weather_only_02.wav
+        #   audiofile: VO_I_think_thats_how_it_works_with_the_music_in_movies_01.wav
+        # - say: VO_I_think_there_is_music_in_every_moment_and_when_we_01.wav
+        #   audiofile: VO_I_think_there_is_music_in_every_moment_and_when_we_02.wav
+        # - say: VO_I_went_to_park_city_with_my_mom_01.wav
+        #   audiofile: VO_I_went_to_park_city_with_my_mom_02_Bgnoise.wav
+        # - say: VO_I_went_to_park_city_with_my_mom_03_Bgnoise.wav
+        #   audiofile: VO_I_wish_i_could_write_my_own_music_01.wav
+        # - say: VO_I_wish_i_could_write_my_own_music_02.wav
+        #   audiofile: VO_I_wish_i_could_write_my_own_music_03.wav
+        # - say: VO_Music_is_like_seeing_a_movie_with_your_ears_01.wav
+        #   audiofile: VO_Music_is_like_seeing_a_movie_with_your_ears_02.wav
+        # - say: VO_My_brother_loves_to_watch_wrestling_and_in_movies_01.wav
+        #   audiofile: VO_My_brother_loves_to_watch_wrestling_and_in_movies_02.wav
+        # - say: VO_My_dad_also_composed_some_new_songs_01.wav
+        #   audiofile: VO_My_dad_also_composed_some_new_songs_02.wav
+        # - say: VO_My_dad_plays_the_tube_in_the_symphony_02.wav
+        #   audiofile: VO_My_friends_from_school_thing_dads_music_is_boring_but_i_01.wav
+        # - say: VO_My_friends_from_school_thing_dads_music_is_boring_but_i_02.wav
+        #   audiofile: VO_My_name_is_lucy_ehm_Im_in_fourth_grade_which_01_Bgnoise.wav
+        # - say: VO_My_name_is_lucy_ehm_Im_in_fourth_grade_which_02.wav
+        #   audiofile: VO_My_school_gave_me_a_price_for_making_a_movie_last_year_01.wav
+        # - say: VO_My_school_gave_me_a_price_for_making_a_movie_last_year_01_p1.wav
+        #   audiofile: VO_My_school_gave_me_a_price_for_making_a_movie_last_year_02_p1.wav
+        # - say: VO_Nice_to_see_you_again_01.wav
+        #   audiofile: VO_Nice_to_see_you_again_02.wav
+        # - say: VO_Ohh_ooh_that_makes_me_thinkg_01.wav
+        #   audiofile: VO_Ohh_ooh_that_makes_me_thinkg_02.wav
+        # - say: VO_Ohh_ooh_that_makes_me_thinkg_03.wav
+        #   audiofile: VO_Okay_well_its_about_a_vampire_but_thats_01.wav
+        # - say: VO_Okay_well_its_about_a_vampire_but_thats_02.wav
+        #   audiofile: VO_Sometimes_Im_watching_a_movie_and_01.wav
+        # - say: VO_Sometimes_Im_watching_a_movie_and_02.wav
+        #   audiofile: VO_Sometimes_in_scary_movies_the_music_makes_you_think_01.wav
+        # - say: VO_Sometimes_i_get_dad_to_make_music_for_my_movies_01.wav
+        #   audiofile: VO_Sometimes_i_get_dad_to_make_music_for_my_movies_02.wav
+        # - say: VO_So_when_you_hear_them_play_youre_hearing_the_way_01 Copy.wav
+        #   audiofile: VO_So_when_you_hear_them_play_youre_hearing_the_way_01.wav
+        # - say: VO_Then_i_take_my_tape_recorder_to_record_them_01.wav
+        #   audiofile: VO_Then_i_take_my_tape_recorder_to_record_them_02.wav
+        # - say: VO_Theres_something_loud_about_how_the_room_goes_01_misspoken.wav
+        #   audiofile: VO_Theres_something_loud_about_how_the_room_goes_02_misspoken.wav
+        # - say: VO_Theres_something_loud_about_how_the_room_goes_03.wav
+        #   audiofile: VO_There_is_a_place_where_there_is_music_all_day_and_01.wav
+        # - say: VO_There_is_a_place_where_there_is_music_all_day_and_02.wav
+        #   audiofile: VO_There_was_a_scene_in_a_movie_with_a_little_kid_01.wav
+        # - say: VO_There_was_a_scene_in_a_movie_with_a_little_kid_02.wav
+        #   audiofile: VO_There_was_this_one_time_I_flapped_a_big_piece_of_01.wav
+        # - say: VO_There_was_this_one_time_I_flapped_a_big_piece_of_02.wav
+        #   audiofile: VO_There_was_this_one_time_I_flapped_a_big_piece_of_03.wav
+        # - say: VO_The_first_song_of_a_movie_is_the_most_01.wav
+        #   audiofile: VO_We_had_a_famous_director_visit_01_p2 Copy.wav
+        # - say: VO_We_had_a_famous_director_visit_01_p2.wav
+        #   audiofile: VO_We_re_back_home_now_01.wav
+        # - say: VO_We_re_back_home_now_02.wav
+        #   audiofile: VO_We_re_back_home_now_03.wav
+        # - say: VO_We_re_back_home_now_04.wav
+        #   audiofile: VO_We_stayed_at_the_lodge_01.wav
+        # - say: VO_We_stayed_at_the_lodge_close_to_mainstreet_02.wav
+        #   audiofile: VO_When_I_have_to_go_down_to_the_basement_theres_screechy_01.wav
+        # - say: VO_When_I_have_to_go_down_to_the_basement_theres_screechy_02.wav
+        #   audiofile: VO_When_I_have_to_go_down_to_the_basement_theres_screechy_04.wav
+        # - say: VO_When_I_have_to_go_down_to_the_basement_theres_screechy_05.wav
+        #   audiofile: VO_When_i_look_at_my_polaroids_and_01.wav
+        # - say: VO_When_i_look_at_my_polaroids_and_02.wav
+        #   audiofile: VO_When_i_share_records_with_my_friends_over_walkie_talkie_they_know_its_01.wav
+        # - say: VO_When_i_share_records_with_my_friends_over_walkie_talkie_they_know_its_02.wav
+        #   audiofile: VO_When_I_was_making_my_movie_I_went_through_and_listened_01.wav
+        # - say: VO_When_I_was_making_my_movie_I_went_through_and_listened_02.wav
+        #   audiofile: VO_When_you_got_out_into_the_cold_weather_01.wav
+        # - say: VO_When_you_got_out_into_the_cold_weather_02.wav
+        #   audiofile: VO_You_can_always_hear_music_at_my_house_dad_plays_01.wav
+        # - say: VO_You_can_always_hear_music_at_my_house_dad_plays_02_Bgnoise.wav
+
+
+
+#         - say: And my friend who moved 01
+#           audiofile: VO_And_my_friend_who_moved_01.wav
+#         - say: And my friend who moved 02
+#           audiofile: VO_And_my_friend_who_moved_02.wav
+#         - say: Can I go yet 01
+#           audiofile: VO_Can_I_go_yet_01.wav
+#         - say: Can I go yet 02
+#           audiofile: VO_Can_I_go_yet_02.wav
+#         - say: Can I introduce myself too 01
+#           audiofile: VO_Can_I_introduce_myself_too_01.wav
+#         - say: Computers are magical 01
+#           audiofile: VO_Computers_are_magical_01.wav
+#         - say: Computers are magical 02
+#           audiofile: VO_Computers_are_magical_02.wav
+#         - say: Do you think I could talk too 01
+#           audiofile: VO_Do_you_think_I_could_talk_too_01.wav
+#         - say: Do you think I could talk too 02
+#           audiofile: VO_Do_you_think_I_could_talk_too_02.wav
+#         - say: Do you think I could talk too 03
+#           audiofile: VO_Do_you_think_I_could_talk_too_03.wav
+#         - say: Has everyone had a turn 01
+#           audiofile: VO_Has_everyone_had_a_turn_01.wav
+#         - say: Has everyone had a turn 02
+#           audiofile: VO_Has_everyone_had_a_turn_02.wav
+#         - say: Havent you ever wondered 01
+#           audiofile: VO_Havent_you_ever_wondered_01.wav
+#         - say: Havent you ever wondered 02
+#           audiofile: VO_Havent_you_ever_wondered_02.wav
+#         - say: Hehe hi 01
+#           audiofile: VO_Hehe_hi_01.wav
+#         - say: Hehe hi 02
+#           audiofile: VO_Hehe_hi_02.wav
+#         - say: Hehe hi 03
+#           audiofile: VO_Hehe_hi_03.wav
+#         - say: Hello 01
+#           audiofile: VO_Hello_01.wav
+#         - say: Hello 02
+#           audiofile: VO_Hello_02.wav
+#         - say: Hello 03
+#           audiofile: VO_Hello_03.wav
+#         - say: Hello 04
+#           audiofile: VO_Hello_04.wav
+#         - say: Hello Can I go yet
+#           audiofile: VO_Hello_Can_I_go_yet.wav
+#         - say: Hello Can I go yet 01
+#           audiofile: VO_Hello_Can_I_go_yet_01.wav
+#         - say: Hello Can I go yet 02
+#           audiofile: VO_Hello_Can_I_go_yet_02.wav
+#         - say: Hey 01
+#           audiofile: VO_Hey_01.wav
+#         - say: Hey Can I introduce myself too 01
+#           audiofile: VO_Hey_Can_I_introduce_myself_too_01.wav
+#         - say: Hey Can I introduce myself too 02
+#           audiofile: VO_Hey_Can_I_introduce_myself_too_02.wav
+#         - say: Hey Can I introduce myself too 03
+#           audiofile: VO_Hey_Can_I_introduce_myself_too_03.wav
+#         - say: Hey Can I introduce myself too 04
+#           audiofile: VO_Hey_Can_I_introduce_myself_too_04.wav
+#         - say: He saw all my 01
+#           audiofile: VO_He_saw_all_my_01.wav
+#         - say: He saw all my 02
+#           audiofile: VO_He_saw_all_my_02.wav
+#         - say: Hi 01
+#           audiofile: VO_Hi_01.wav
+#         - say: Hi 02
+#           audiofile: VO_Hi_02.wav
+#         - say: Hi 03
+#           audiofile: VO_Hi_03.wav
+#         - say: Hi 04
+#           audiofile: VO_Hi_04.wav
+#         - say: Hi 05
+#           audiofile: VO_Hi_05.wav
+#         - say: Hi Dont forget me 01
+#           audiofile: VO_Hi_Dont_forget_me_01.wav
+#         - say: Hi Dont forget me 02
+#           audiofile: VO_Hi_Dont_forget_me_02.wav
+#         - say: Hmm 01
+#           audiofile: VO_Hmm_01.wav
+#         - say: Hm 01
+#           audiofile: VO_Hm_01.wav
+#         - say: Hm thats a good question 01
+#           audiofile: VO_Hm_thats_a_good_question_01.wav
+#         - say: Hm thats a good question 02
+#           audiofile: VO_Hm_thats_a_good_question_02.wav
+#         - say: Id like a turn to talk too 01
+#           audiofile: VO_Id_like_a_turn_to_talk_too_01.wav
+#         - say: Id like a turn to talk too 02
+#           audiofile: VO_Id_like_a_turn_to_talk_too_02.wav
+#         - say: Im eight Grown 01
+#           audiofile: VO_Im_eight_Grown_01.wav
+#         - say: Im eight Grown 02
+#           audiofile: VO_Im_eight_Grown_02.wav
+#         - say: Im eight Nana 01
+#           audiofile: VO_Im_eight_Nana_01.wav
+#         - say: Im eight Nana 02
+#           audiofile: VO_Im_eight_Nana_02.wav
+#         - say: Intro p1 My name is 01
+#           audiofile: VO_Intro_p1_My_name_is_01.wav
+#         - say: Intro p1 My name is 02
+#           audiofile: VO_Intro_p1_My_name_is_02.wav
+#         - say: Intro p2 Its my first time 01
+#           audiofile: VO_Intro_p2_Its_my_first_time_01.wav
+#         - say: Intro p3 Ive never talked 01
+#           audiofile: VO_Intro_p3_Ive_never_talked_01.wav
+#         - say: Intro p3 Ive never talked 02
+#           audiofile: VO_Intro_p3_Ive_never_talked_02.wav
+#         - say: Is it my turn to go now 01
+#           audiofile: VO_Is_it_my_turn_to_go_now_01.wav
+#         - say: Is it my turn to go now 02
+#           audiofile: VO_Is_it_my_turn_to_go_now_02.wav
+#         - say: Is it my turn to go now 03
+#           audiofile: VO_Is_it_my_turn_to_go_now_03.wav
+#         - say: Its great to see so many 01
+#           audiofile: VO_Its_great_to_see_so_many_01.wav
+#         - say: Its great to see so many 02
+#           audiofile: VO_Its_great_to_see_so_many_02.wav
+#         - say: Its scary even though 01
+#           audiofile: VO_Its_scary_even_though_01.wav
+#         - say: Its scary even though 02
+#           audiofile: VO_Its_scary_even_though_02.wav
+#         - say: It can be weird 01
+#           audiofile: VO_It_can_be_weird_01.wav
+#         - say: It can be weird 02
+#           audiofile: VO_It_can_be_weird_02.wav
+#         - say: Ive been thinking about 01
+#           audiofile: VO_Ive_been_thinking_about_01.wav
+#         - say: Ive been thinking about 02
+#           audiofile: VO_Ive_been_thinking_about_02.wav
+#         - say: Ive made new friends 01
+#           audiofile: VO_Ive_made_new_friends_01.wav
+#         - say: Ive made new friends 02
+#           audiofile: VO_Ive_made_new_friends_02.wav
+#         - say: I cant believe i get 01
+#           audiofile: VO_I_cant_believe_i_get_01.wav
+#         - say: I cant believe i get 02
+#           audiofile: VO_I_cant_believe_i_get_02.wav
+#         - say: I can talk to people 01
+#           audiofile: VO_I_can_talk_to_people_01.wav
+#         - say: I can talk to people 02
+#           audiofile: VO_I_can_talk_to_people_02.wav
+#         - say: I get to be here 01
+#           audiofile: VO_I_get_to_be_here_01.wav
+#         - say: I get to be here 02
+#           audiofile: VO_I_get_to_be_here_02.wav
+#         - say: I get to go now 01
+#           audiofile: VO_I_get_to_go_now_01.wav
+#         - say: I get to go now 02
+#           audiofile: VO_I_get_to_go_now_02.wav
+#         - say: I thought that was a 01
+#           audiofile: VO_I_thought_that_was_a_01.wav
+#         - say: I thought that was a 02
+#           audiofile: VO_I_thought_that_was_a_02.wav
+#         - say: Lately weve been using 01
+#           audiofile: VO_Lately_weve_been_using_01.wav
+#         - say: Lately weve been using 02
+#           audiofile: VO_Lately_weve_been_using_02.wav #REVIEW: Misspoken
+#         - say: Lets all go around 01
+#           audiofile: VO_Lets_all_go_around_01.wav #REVIEW: mispoken and in introdu
+#         - say: Lets all go around 02
+#           audiofile: VO_Lets_all_go_around_02.wav
+#         - say: Maybe even the ways 01
+#           audiofile: VO_Maybe_even_the_ways_01.wav
+#         - say: Maybe even the ways 02
+#           audiofile: VO_Maybe_even_the_ways_02.wav
+#         - say: Mom and dad didnt help 01
+#           audiofile: VO_Mom_and_dad_didnt_help_01.wav
+#         - say: Mom and dad didnt help 02
+#           audiofile: VO_Mom_and_dad_didnt_help_02.wav
+#         - say: Mom said it would be 01
+#           audiofile: VO_Mom_said_it_would_be_01.wav
+#         - say: Mom said it would be 02
+#           audiofile: VO_Mom_said_it_would_be_02.wav
+#         - say: My friend moved 01
+#           audiofile: VO_My_friend_moved_01.wav
+#         - say: My friend moved 02
+#           audiofile: VO_My_friend_moved_02.wav
+#         - say: My name is Lucy 01
+#           audiofile: VO_My_name_is_Lucy_01.wav
+#         - say: Oh and in computer class 01
+#           audiofile: VO_Oh_and_in_computer_class_01.wav
+#         - say: Oh hi 01
+#           audiofile: VO_Oh_hi_01.wav
+#         - say: Oh hi 02
+#           audiofile: VO_Oh_hi_02.wav
+#         - say: Oh hi 03
+#           audiofile: VO_Oh_hi_03.wav
+#         - say: Oh hi Yay 01
+#           audiofile: VO_Oh_hi_Yay_01.wav
+#         - say: Oh hi Yay 02
+#           audiofile: VO_Oh_hi_Yay_02.wav
+#         - say: Oh hi Yay 03
+#           audiofile: VO_Oh_hi_Yay_03.wav
+#         - say: Oh is it my turn 01
+#           audiofile: VO_Oh_is_it_my_turn_01.wav
+#         - say: Oh is it my turn 02
+#           audiofile: VO_Oh_is_it_my_turn_02.wav
+#         - say: Oh is it my turn 03
+#           audiofile: VO_Oh_is_it_my_turn_03.wav
+#         - say: Oh is it my turn 04
+#           audiofile: VO_Oh_is_it_my_turn_04.wav
+#         - say: Oh its my turn 01
+#           audiofile: VO_Oh_its_my_turn_01.wav
+#         - say: Oh its my turn 02
+#           audiofile: VO_Oh_its_my_turn_02.wav
+#         - say: Someday Ill get to see 01
+#           audiofile: VO_Someday_Ill_get_to_see_01.wav
+#         - say: Someday Ill get to see 02
+#           audiofile: VO_Someday_Ill_get_to_see_02.wav
+#         - say: So I should introduce myself 01
+#           audiofile: VO_So_I_should_introduce_myself_01.wav
+#         - say: So should I introuce myself 01
+#           audiofile: VO_So_should_I_introuce_myself_01.wav
+#         - say: So the topic is working 01
+#           audiofile: VO_So_the_topic_is_working_01.wav
+#         - say: So the topic is working 02
+#           audiofile: VO_So_the_topic_is_working_02.wav
+#         - say: So Working across platforms 01
+#           audiofile: VO_So_Working_across_platforms_01.wav
+#         - say: So Working across platforms 02
+#           audiofile: VO_So_Working_across_platforms_02.wav
+#         - say: The first victim 01
+#           audiofile: VO_The_first_victim_01.wav
+#         - say: The first victim 02
+#           audiofile: VO_The_first_victim_02.wav
+#         - say: The question about platforms 01
+#           audiofile: VO_The_question_about_platforms_01.wav
+#         - say: The question about platforms 02
+#           audiofile: VO_The_question_about_platforms_02.wav
+#         - say: This is exciting Dont you 01
+#           audiofile: VO_This_is_exciting_Dont_you_01.wav
+#         - say: This is exciting Dont you 02
+#           audiofile: VO_This_is_exciting_Dont_you_02.wav
+#         - say: Um My mom drove me 01
+#           audiofile: VO_Um_My_mom_drove_me_01.wav #REVIEW: a bit noise
+#         - say: Um My mom drove me 02
+#           audiofile: VO_Um_My_mom_drove_me_02.wav
+#         - say: Wait I have one more 01
+#           audiofile: VO_Wait_I_have_one_more_01.wav
+#         - say: Wait I have one more 02
+#           audiofile: VO_Wait_I_have_one_more_02.wav
+#         - say: We use walkie talkies 01
+#           audiofile: VO_We_use_walkie_talkies_01.wav
+#         - say: We use walkie talkies 02
+#           audiofile: VO_We_use_walkie_talkies_02.wav
+#         - say: What else do you 01
+#           audiofile: VO_What_else_do_you_01.wav
+#         - say: What else do you 02
+#           audiofile: VO_What_else_do_you_02.wav
+#         - say: What you said makes 01
+#           audiofile: VO_What_you_said_makes_01.wav
+#         - say: What you said makes 02
+#           audiofile: VO_What_you_said_makes_02.wav
+#         - say: Who wants to go first 01
+#           audiofile: VO_Who_wants_to_go_first_01.wav
+#         - say: Who wants to go first 02
+#           audiofile: VO_Who_wants_to_go_first_02.wav
+#         - say: Who wants to go first 03
+#           audiofile: VO_Who_wants_to_go_first_03.wav
+#         - say: Who wants to go first 04
+#           audiofile: VO_Who_wants_to_go_first_04.wav
+#         - say: Who wants to start 01
+#           audiofile: VO_Who_wants_to_start_01.wav
+#         - say: Who wants to start 02
+#           audiofile: VO_Who_wants_to_start_02.wav
+#         - say: Yay 01
+#           audiofile: VO_Yay_01.wav
+#         - say: Yay 02
+#           audiofile: VO_Yay_02.wav
+#         - say: Yay 03
+#           audiofile: VO_Yay_03.wav
+
+
+
+#         ### PART 2
+
+
+#         - say: And it should be really short 01
+#           audiofile: VO_And_it_should_be_really_short_01.wav
+#         - say: and might help you find the answer 01
+#           audiofile: VO_and_might_help_you_find_the_answer_01.wav #REVIEW: error sound in the end
+#         - say: and might help you find the answer 02
+#           audiofile: VO_and_might_help_you_find_the_answer_02.wav
+#         - say: And remembering all the parts can be hard 02
+#           audiofile: VO_And_remembering_all_the_parts_can_be_hard_02.wav
+#         - say: And remembering all the parts that can be hard 01
+#           audiofile: VO_And_remembering_all_the_parts_that_can_be_hard_01.wav
+#         - say: And then Im not sure what to say next 01
+#           audiofile: VO_And_then_Im_not_sure_what_to_say_next_01.wav
+#         - say: And we listen to music at the same time 01
+#           audiofile: VO_And_we_listen_to_music_at_the_same_time_01.wav
+#         - say: And we listen to music at the same time 02
+#           audiofile: VO_And_we_listen_to_music_at_the_same_time_02.wav
+#         - say: And when i want to make a movie I have to remember how it looks and sounds 01
+#           audiofile: VO_And_when_i_want_to_make_a_movie_I_have_to_remember_how_it_looks_and_sounds_01.wav
+#         - say: anyone wanna read my first draft 01
+#           audiofile: VO_anyone_wanna_read_my_first_draft_01.wav
+#         - say: Anyone wanna read my first draft 02
+#           audiofile: VO_Anyone_wanna_read_my_first_draft_02.wav
+#         - say: at recess we come up with impossible missions that we 01
+#           audiofile: VO_at_recess_we_come_up_with_impossible_missions_that_we_01.wav
+#         - say: at recess we come up with impossible missions that we 02
+#           audiofile: VO_at_recess_we_come_up_with_impossible_missions_that_we_02.wav
+#         - say: Because pictures dont have words on them I always 01
+#           audiofile: VO_Because_pictures_dont_have_words_on_them_I_always_01.wav
+#         - say: Because pictures dont have words on them I always 02
+#           audiofile: VO_Because_pictures_dont_have_words_on_them_I_always_02.wav
+#         - say: Because pictures dont have words on them I always 03
+#           audiofile: VO_Because_pictures_dont_have_words_on_them_I_always_03.wav
+#         - say: But I also have more time to think about 01
+#           audiofile: VO_But_I_also_have_more_time_to_think_about_01.wav
+#         - say: But I also have more time to think about 02
+#           audiofile: VO_But_I_also_have_more_time_to_think_about_02.wav
+#         - say: But i feel kind of stuck 01
+#           audiofile: VO_But_i_feel_kind_of_stuck_01.wav
+#         - say: But i think thats what makes it so fun 01
+#           audiofile: VO_But_i_think_thats_what_makes_it_so_fun_01.wav
+#         - say: But i think thats what makes it so fun 02
+#           audiofile: VO_But_i_think_thats_what_makes_it_so_fun_02.wav
+#         - say: But I think that day we 01
+#           audiofile: VO_But_I_think_that_day_we_01.wav
+#         - say: But I think that day we 02
+#           audiofile: VO_But_I_think_that_day_we_02.wav
+#         - say: Did you see all the snow today 01
+#           audiofile: VO_Did_you_see_all_the_snow_today_01.wav
+#         - say: Did you see all the snow today 02
+#           audiofile: VO_Did_you_see_all_the_snow_today_02.wav
+#         - say: Does someone else wanna talke now 01
+#           audiofile: VO_Does_someone_else_wanna_talke_now_01.wav
+#         - say: Does someone else wanna talke now 02
+#           audiofile: VO_Does_someone_else_wanna_talke_now_02.wav
+#         - say: Does that happen to you 01
+#           audiofile: VO_Does_that_happen_to_you_01.wav
+#         - say: Does that happen to you 02
+#           audiofile: VO_Does_that_happen_to_you_02.wav
+#         - say: Draftcula 01
+#           audiofile: VO_Draftcula_01.wav
+#         - say: Drawing is faster but it doesnt usually look so great 01
+#           audiofile: VO_Drawing_is_faster_but_it_doesnt_usually_look_so_great_01.wav
+#         - say: Drawing is faster but it doesnt usually look so great 02
+#           audiofile: VO_Drawing_is_faster_but_it_doesnt_usually_look_so_great_02.wav
+#         - say: During writers workshop our homeroom teacher says show dont tell 01
+#           audiofile: VO_During_writers_workshop_our_homeroom_teacher_says_show_dont_tell_01.wav
+#         - say: During writers workshop our homeroom teacher says show dont tell 02
+#           audiofile: VO_During_writers_workshop_our_homeroom_teacher_says_show_dont_tell_02.wav
+#         - say: During writers workshop our homeroom teacher says show dont tell 03
+#           audiofile: VO_During_writers_workshop_our_homeroom_teacher_says_show_dont_tell_03.wav
+#         - say: Has everyone gone already 01
+#           audiofile: VO_Has_everyone_gone_already_01.wav
+#         - say: Has everyone gone already 02
+#           audiofile: VO_Has_everyone_gone_already_02.wav
+#         - say: How do they know if Im happy 01
+#           audiofile: VO_How_do_they_know_if_Im_happy_01.wav
+#         - say: How do they know if Im happy 02
+#           audiofile: VO_How_do_they_know_if_Im_happy_02.wav
+#         - say: How do you even do that with typing Ihave to show with my polaroids 01
+#           audiofile: VO_How_do_you_even_do_that_with_typing_Ihave_to_show_with_my_polaroids_01.wav
+#         - say: How do you even do that with typing Ihave to show with my polaroids 02
+#           audiofile: VO_How_do_you_even_do_that_with_typing_Ihave_to_show_with_my_polaroids_02.wav
+#         - say: How do you even do that with typing Ihave to show with my polaroids 03
+#           audiofile: VO_How_do_you_even_do_that_with_typing_Ihave_to_show_with_my_polaroids_03.wav
+#         - say: if I want to make it look like pig puppet was wearing my favorite 01
+#           audiofile: VO_if_I_want_to_make_it_look_like_pig_puppet_was_wearing_my_favorite_01.wav #REVIEW: like A pig puppat; also error sound in the end
+#         - say: if I want to make it look like pig puppet was wearing my favorite 02
+#           audiofile: VO_if_I_want_to_make_it_look_like_pig_puppet_was_wearing_my_favorite_02.wav
+#         - say: Im not sure what that is but it seems to work 01
+#           audiofile: VO_Im_not_sure_what_that_is_but_it_seems_to_work_01.wav
+#         - say: Im working on a script about dracula 01
+#           audiofile: VO_Im_working_on_a_script_about_dracula_01.wav
+#         - say: Im working on a script about dracula but i feel kind of 02
+#           audiofile: VO_Im_working_on_a_script_about_dracula_but_i_feel_kind_of_02.wav
+#         - say: Its easier when i can see them 01
+#           audiofile: VO_Its_easier_when_i_can_see_them_01.wav
+#         - say: Its easier when i can see them and then 01
+#           audiofile: VO_Its_easier_when_i_can_see_them_and_then_01.wav
+#         - say: Its weird 01
+#           audiofile: VO_Its_weird_01.wav
+#         - say: Its weird 02
+#           audiofile: VO_Its_weird_02.wav
+#         - say: Its weird 03
+#           audiofile: VO_Its_weird_03.wav
+#         - say: It can be hard to work on the computer 02
+#           audiofile: VO_It_can_be_hard_to_work_on_the_computer_02.wav
+#         - say: It can be hard to work on the computer because it takes a while 01
+#           audiofile: VO_It_can_be_hard_to_work_on_the_computer_because_it_takes_a_while_01.wav
+#         - say: It can be hard to work on the computer because it takes a while 02
+#           audiofile: VO_It_can_be_hard_to_work_on_the_computer_because_it_takes_a_while_02.wav
+#         - say: It helps when we each have a job to do 01
+#           audiofile: VO_It_helps_when_we_each_have_a_job_to_do_01.wav
+#         - say: It helps when we each have a job to do 02
+#           audiofile: VO_It_helps_when_we_each_have_a_job_to_do_02.wav
+#         - say: It helps when we each have a job to do 03
+#           audiofile: VO_It_helps_when_we_each_have_a_job_to_do_03.wav
+#         - say: It sounds silly I know 01
+#           audiofile: VO_It_sounds_silly_I_know_01.wav
+#         - say: It sounds silly I know 02
+#           audiofile: VO_It_sounds_silly_I_know_02.wav
+#         - say: It sounds silly I know but I think thats 01
+#           audiofile: VO_It_sounds_silly_I_know_but_I_think_thats_01.wav
+#         - say: It sounds silly I know but I think thats 02
+#           audiofile: VO_It_sounds_silly_I_know_but_I_think_thats_02.wav
+#         - say: Ive been trying to but Im a slow writer 01
+#           audiofile: VO_Ive_been_trying_to_but_Im_a_slow_writer_01.wav
+#         - say: Ive been trying to but Im a slow writer 02
+#           audiofile: VO_Ive_been_trying_to_but_Im_a_slow_writer_02.wav
+#         - say: I bet its the same for them when i say something 02
+#           audiofile: VO_I_bet_its_the_same_for_them_when_i_say_something_02.wav
+#         - say: I cant really focus because dracula is so cool 01
+#           audiofile: VO_I_cant_really_focus_because_dracula_is_so_cool_01.wav
+#         - say: I cant remember giggle 01
+#           audiofile: VO_I_cant_remember_giggle_01.wav
+#         - say: I cant remember giggle 02
+#           audiofile: VO_I_cant_remember_giggle_02.wav
+#         - say: I can even share the scary sounds from the attic with my friends 01
+#           audiofile: VO_I_can_even_share_the_scary_sounds_from_the_attic_with_my_friends_01.wav
+#         - say: I can even share the scary sounds from the attic with my friends 02
+#           audiofile: VO_I_can_even_share_the_scary_sounds_from_the_attic_with_my_friends_02.wav
+#         - say: I can make my new pictures out of old pictures 01
+#           audiofile: VO_I_can_make_my_new_pictures_out_of_old_pictures_01.wav
+#         - say: I can make my new pictures out of old pictures 02
+#           audiofile: VO_I_can_make_my_new_pictures_out_of_old_pictures_02.wav
+#         - say: I can wait to make a snowman later if anyone wants 01
+#           audiofile: VO_I_can_wait_to_make_a_snowman_later_if_anyone_wants_01.wav
+#         - say: I can wait to make a snowman later if anyone wants 02
+#           audiofile: VO_I_can_wait_to_make_a_snowman_later_if_anyone_wants_02.wav
+#         - say: I hang them all in my room and they remind me of her 01
+#           audiofile: VO_I_hang_them_all_in_my_room_and_they_remind_me_of_her_01.wav
+#         - say: I hang them all in my room and they remind me of her 02
+#           audiofile: VO_I_hang_them_all_in_my_room_and_they_remind_me_of_her_02.wav
+#         - say: I have too many ideas and it should be really short 01
+#           audiofile: VO_I_have_too_many_ideas_and_it_should_be_really_short_01.wav
+#         - say: I have too many ideas and it should be really short 02
+#           audiofile: VO_I_have_too_many_ideas_and_it_should_be_really_short_02.wav
+#         - say: I have to take my time to keep the pieces safe 01
+#           audiofile: VO_I_have_to_take_my_time_to_keep_the_pieces_safe_01.wav
+#         - say: I have to take my time to keep the pieces safe 02
+#           audiofile: VO_I_have_to_take_my_time_to_keep_the_pieces_safe_02.wav
+#         - say: I hope I did a good job 02
+#           audiofile: VO_I_hope_I_did_a_good_job_02.wav
+#         - say: I hope to meet someone here who could help me with the writing 01
+#           audiofile: VO_I_hope_to_meet_someone_here_who_could_help_me_with_the_writing_01.wav
+#         - say: I imagine thats what its like to work on a movie like a 01
+#           audiofile: VO_I_imagine_thats_what_its_like_to_work_on_a_movie_like_a_01.wav
+#         - say: I imagine thats what its like to work on a movie like a 02
+#           audiofile: VO_I_imagine_thats_what_its_like_to_work_on_a_movie_like_a_02.wav
+#         - say: I love working with friends 01
+#           audiofile: VO_I_love_working_with_friends_01.wav
+#         - say: I love working with friends 02
+#           audiofile: VO_I_love_working_with_friends_02.wav
+#         - say: I make maps and draw sketches too 01
+#           audiofile: VO_I_make_maps_and_draw_sketches_too_01.wav
+#         - say: I make maps and draw sketches too 02
+#           audiofile: VO_I_make_maps_and_draw_sketches_too_02.wav
+#         - say: I read somewhere that you need to write 01
+#           audiofile: VO_I_read_somewhere_that_you_need_to_write_01.wav
+#         - say: I take pictures all the 01
+#           audiofile: VO_I_take_pictures_all_the_01.wav
+#         - say: I thought mom and dad would be mad but they actually liked it 01
+#           audiofile: VO_I_thought_mom_and_dad_would_be_mad_but_they_actually_liked_it_01.wav
+#         - say: I thought mom and dad would be mad but they actually liked it 02
+#           audiofile: VO_I_thought_mom_and_dad_would_be_mad_but_they_actually_liked_it_02.wav
+#         - say: I told my mom and she said we where del e gating 01
+#           audiofile: VO_I_told_my_mom_and_she_said_we_where_del_e_gating_01.wav
+#         - say: I told my mom and she said we where del e gating 02
+#           audiofile: VO_I_told_my_mom_and_she_said_we_where_del_e_gating_02.wav
+#         - say: I told my mom and she said we where del e gating 03
+#           audiofile: VO_I_told_my_mom_and_she_said_we_where_del_e_gating_03.wav
+#         - say: I try to add them to my scrapbook with tape 01
+#           audiofile: VO_I_try_to_add_them_to_my_scrapbook_with_tape_01.wav
+#         - say: I watch the moon when its alone in the empty 01
+#           audiofile: VO_I_watch_the_moon_when_its_alone_in_the_empty_01.wav
+#         - say: I watch the moon when its alone in the empty 02
+#           audiofile: VO_I_watch_the_moon_when_its_alone_in_the_empty_02.wav
+#         - say: Like a camel in ballet slippers 01
+#           audiofile: VO_Like_a_camel_in_ballet_slippers_01.wav
+#         - say: Like a giant puzzle 01
+#           audiofile: VO_Like_a_giant_puzzle_01.wav
+#         - say: Like a giant puzzle 02
+#           audiofile: VO_Like_a_giant_puzzle_02.wav
+#         - say: Mom and i are going to the main area again 01
+#           audiofile: VO_Mom_and_i_are_going_to_the_main_area_again_01.wav
+#         - say: Mom and i are going to the main area again 02
+#           audiofile: VO_Mom_and_i_are_going_to_the_main_area_again_02.wav
+#         - say: My dad has a lot of old records in the basement 01
+#           audiofile: VO_My_dad_has_a_lot_of_old_records_in_the_basement_01.wav
+#         - say: My dad has a lot of old records in the basement 02
+#           audiofile: VO_My_dad_has_a_lot_of_old_records_in_the_basement_02.wav
+#         - say: My favorite is making art out of things that werent art before 01
+#           audiofile: VO_My_favorite_is_making_art_out_of_things_that_werent_art_before_01.wav
+#         - say: My favorite is making art out of things that werent art before 02
+#           audiofile: VO_My_favorite_is_making_art_out_of_things_that_werent_art_before_02.wav
+#         - say: Normally we annoy each other 01
+#           audiofile: VO_Normally_we_annoy_each_other_01.wav
+#         - say: Normally we annoy each other 02
+#           audiofile: VO_Normally_we_annoy_each_other_02.wav
+#         - say: Normally we annoy each other But I think that day we 01
+#           audiofile: VO_Normally_we_annoy_each_other_But_I_think_that_day_we_01.wav
+#         - say: No one was allowed to touch it and we chased each other all day 01
+#           audiofile: VO_No_one_was_allowed_to_touch_it_and_we_chased_each_other_all_day_01.wav #REVIEW: Misspoken 
+#         - say: No one was allowed to touch it and we chased each other all day 02
+#           audiofile: VO_No_one_was_allowed_to_touch_it_and_we_chased_each_other_all_day_02.wav
+#         - say: No one was allowed to touch it and we chased each other all day 03
+#           audiofile: VO_No_one_was_allowed_to_touch_it_and_we_chased_each_other_all_day_03.wav
+#         - say: Oh i love taking polaroids 01
+#           audiofile: VO_Oh_i_love_taking_polaroids_01.wav
+#         - say: Oh i love taking polaroids I take pictures 01
+#           audiofile: VO_Oh_i_love_taking_polaroids_I_take_pictures_01.wav
+#         - say: One time I used my paints to draw a big monster face 01
+#           audiofile: VO_One_time_I_used_my_paints_to_draw_a_big_monster_face_01.wav
+#         - say: One time I used my paints to draw a big monster face 02
+#           audiofile: VO_One_time_I_used_my_paints_to_draw_a_big_monster_face_02.wav
+#         - say: One time there was this rainstorm and we couldnt go outside 01
+#           audiofile: VO_One_time_there_was_this_rainstorm_and_we_couldnt_go_outside_01.wav
+#         - say: One time there was this rainstorm and we couldnt go outside 02
+#           audiofile: VO_One_time_there_was_this_rainstorm_and_we_couldnt_go_outside_02.wav
+#         - say: Or a not so sneaky camera flash 01
+#           audiofile: VO_Or_a_not_so_sneaky_camera_flash_01.wav
+#         - say: Or a not so sneaky camera flash 02
+#           audiofile: VO_Or_a_not_so_sneaky_camera_flash_02.wav
+#         - say: Or Ill pin them on the wall 01
+#           audiofile: VO_Or_Ill_pin_them_on_the_wall_01.wav
+#         - say: Or Ill pin them on the wall 02
+#           audiofile: VO_Or_Ill_pin_them_on_the_wall_02.wav
+#         - say: Or mad 01
+#           audiofile: VO_Or_mad_01.wav
+#         - say: Or mad 02
+#           audiofile: VO_Or_mad_02.wav
+#         - say: Or sad 01
+#           audiofile: VO_Or_sad_01.wav
+#         - say: Or sad 02
+#           audiofile: VO_Or_sad_02.wav
+#         - say: Our favorite is phonygraphs 01
+#           audiofile: VO_Our_favorite_is_phonygraphs_01.wav
+#         - say: Our favorite is phonygraphs 02
+#           audiofile: VO_Our_favorite_is_phonygraphs_02.wav
+#         - say: People see them differently I think 01
+#           audiofile: VO_People_see_them_differently_I_think_01.wav
+#         - say: People see them differently I think 02
+#           audiofile: VO_People_see_them_differently_I_think_02.wav
+#         - say: Show dont tell 01
+#           audiofile: VO_Show_dont_tell_01.wav
+#         - say: Show dont tell 02
+#           audiofile: VO_Show_dont_tell_02.wav
+#         - say: Someone told me capturing moments is what 01
+#           audiofile: VO_Someone_told_me_capturing_moments_is_what_01.wav
+#         - say: Someone told me capturing moments is what 02
+#           audiofile: VO_Someone_told_me_capturing_moments_is_what_02.wav
+#         - say: Sometimes its hard for me to understand how my friends feel when 01
+#           audiofile: VO_Sometimes_its_hard_for_me_to_understand_how_my_friends_feel_when_01.wav
+#         - say: Sometimes its hard for me to understand how my friends feel when 02
+#           audiofile: VO_Sometimes_its_hard_for_me_to_understand_how_my_friends_feel_when_02.wav
+#         - say: so my brother and i had to make up games 01
+#           audiofile: VO_so_my_brother_and_i_had_to_make_up_games_01.wav
+#         - say: so my brother and i had to make up games 02
+#           audiofile: VO_so_my_brother_and_i_had_to_make_up_games_02.wav
+#         - say: Thats all 01
+#           audiofile: VO_Thats_all_01.wav
+#         - say: Thats all 02
+#           audiofile: VO_Thats_all_02.wav
+#         - say: Thats all 03
+#           audiofile: VO_Thats_all_03.wav
+#         - say: Thats everything that came to my mind 01
+#           audiofile: VO_Thats_everything_that_came_to_my_mind_01.wav
+#         - say: Thats everything that came to my mind 02
+#           audiofile: VO_Thats_everything_that_came_to_my_mind_02.wav
+#         - say: That changes the whole story 01
+#           audiofile: VO_That_changes_the_whole_story_01.wav
+#         - say: That changes the whole story 02
+#           audiofile: VO_That_changes_the_whole_story_02.wav
+#         - say: That changes the whole story and might help you 01
+#           audiofile: VO_That_changes_the_whole_story_and_might_help_you_01.wav
+#         - say: That way everything gets done quicker 02
+#           audiofile: VO_That_way_everything_gets_done_quicker_02.wav
+#         - say: That way everything gets done quicker 03
+#           audiofile: VO_That_way_everything_gets_done_quicker_03.wav
+#         - say: Then we get our parents to mail the pictures to each other so 01
+#           audiofile: VO_Then_we_get_our_parents_to_mail_the_pictures_to_each_other_so_01.wav
+#         - say: Then we get our parents to mail the pictures to each other so 02
+#           audiofile: VO_Then_we_get_our_parents_to_mail_the_pictures_to_each_other_so_02.wav
+#         - say: There are so many things I dream about even 01
+#           audiofile: VO_There_are_so_many_things_I_dream_about_even_01.wav
+#         - say: There are so many things I dream about even 02
+#           audiofile: VO_There_are_so_many_things_I_dream_about_even_02.wav
+#         - say: There are so many things I dream about everyday 01
+#           audiofile: VO_There_are_so_many_things_I_dream_about_everyday_01.wav
+#         - say: There could be a tiny trace of something 01
+#           audiofile: VO_There_could_be_a_tiny_trace_of_something_01.wav
+#         - say: They see probably all kinds of 01
+#           audiofile: VO_They_see_probably_all_kinds_of_01.wav
+#         - say: The walkie talkie is fun because i feel like Im a detective 01
+#           audiofile: VO_The_walkie_talkie_is_fun_because_i_feel_like_Im_a_detective_01.wav #REVIEW: offscript in a detective movie missing
+#         - say: The walkie talkie is fun because i feel like Im in a detective 02
+#           audiofile: VO_The_walkie_talkie_is_fun_because_i_feel_like_Im_in_a_detective_02.wav
+#         - say: The walkie talkie is fun because i feel like Im in a detective 03
+#           audiofile: VO_The_walkie_talkie_is_fun_because_i_feel_like_Im_in_a_detective_03.wav
+#         - say: To be a good detective you need to observe 01
+#           audiofile: VO_To_be_a_good_detective_you_need_to_observe_01.wav
+#         - say: To be a good detective you need to observe 02
+#           audiofile: VO_To_be_a_good_detective_you_need_to_observe_02.wav
+#         - say: Was I the last person to talk 01
+#           audiofile: VO_Was_I_the_last_person_to_talk_01.wav
+#         - say: Was I the last person to talk 02
+#           audiofile: VO_Was_I_the_last_person_to_talk_02.wav
+#         - say: Were they smiling or frowniiing 01
+#           audiofile: VO_Were_they_smiling_or_frowniiing_01.wav
+#         - say: Were they smiling or frowning when they said it 01
+#           audiofile: VO_Were_they_smiling_or_frowning_when_they_said_it_01.wav
+#         - say: We both put a bunch of lights on the floor 01
+#           audiofile: VO_We_both_put_a_bunch_of_lights_on_the_floor_01.wav
+#         - say: We put a bunch of lights on the floor 02
+#           audiofile: VO_We_put_a_bunch_of_lights_on_the_floor_02.wav
+#         - say: We put a bunch of lights on the floor 03
+#           audiofile: VO_We_put_a_bunch_of_lights_on_the_floor_03.wav
+#         - say: We re going to watch a movie later mom got the tickets she didnt wanna 01
+#           audiofile: VO_We_re_going_to_watch_a_movie_later_mom_got_the_tickets_she_didnt_wanna_01.wav
+#         - say: We tell each other funny things to draw 01
+#           audiofile: VO_We_tell_each_other_funny_things_to_draw_01.wav
+#         - say: We tell each other funny things to draw like a camel with 02
+#           audiofile: VO_We_tell_each_other_funny_things_to_draw_like_a_camel_with_02.wav
+#         - say: Whenever i get a new picture i cant stop laughing 01
+#           audiofile: VO_Whenever_i_get_a_new_picture_i_cant_stop_laughing_01.wav
+#         - say: Whenever i get a new picture i cant stop laughing 02
+#           audiofile: VO_Whenever_i_get_a_new_picture_i_cant_stop_laughing_02.wav
+#         - say: When Im working on a new case my polaroids is key to 01
+#           audiofile: VO_When_Im_working_on_a_new_case_my_polaroids_is_key_to_01.wav
+#         - say: When I look at them I remember 01
+#           audiofile: VO_When_I_look_at_them_I_remember_01.wav
+#         - say: When I look at them I remember 02
+#           audiofile: VO_When_I_look_at_them_I_remember_02.wav
+#         - say: When i make movies I want to take 01
+#           audiofile: VO_When_i_make_movies_I_want_to_take_01.wav
+#         - say: When i make movies I want to take 02
+#           audiofile: VO_When_i_make_movies_I_want_to_take_02.wav
+#         - say: When i make movies I want to take whats in my head 01
+#           audiofile: VO_When_i_make_movies_I_want_to_take_whats_in_my_head_01.wav
+#         - say: When I see an interesting thing I need 01
+#           audiofile: VO_When_I_see_an_interesting_thing_I_need_01.wav
+#         - say: When I see an interesting thing I need 02
+#           audiofile: VO_When_I_see_an_interesting_thing_I_need_02.wav
+#         - say: When I show my brother he doesnt 01
+#           audiofile: VO_When_I_show_my_brother_he_doesnt_01.wav
+#         - say: When I show my brother he doesnt 02
+#           audiofile: VO_When_I_show_my_brother_he_doesnt_02.wav
+#         - say: When I show my brother he doesnt 03
+#           audiofile: VO_When_I_show_my_brother_he_doesnt_03.wav
+#         - say: When you have as many polaroids as I do they 01
+#           audiofile: VO_When_you_have_as_many_polaroids_as_I_do_they_01.wav
+#         - say: When you have as many polaroids as I do they 02
+#           audiofile: VO_When_you_have_as_many_polaroids_as_I_do_they_02.wav
+#         - say: When you have as many polaroids as I do they 03
+#           audiofile: VO_When_you_have_as_many_polaroids_as_I_do_they_03.wav
+#         - say: Who wants to go next 01
+#           audiofile: VO_Who_wants_to_go_next_01.wav
+#         - say: Who wants to go next 02
+#           audiofile: VO_Who_wants_to_go_next_02.wav
+#         - say: Who wants to go next 03
+#           audiofile: VO_Who_wants_to_go_next_03.wav
+#         - say: Wow I wasnt expecting to go first 02
+#           audiofile: VO_Wow_I_wasnt_expecting_to_go_first_02.wav
+#         - say: Wow I wasnt expecting to go first I hope I did a good job 01
+#           audiofile: VO_Wow_I_wasnt_expecting_to_go_first_I_hope_I_did_a_good_job_01.wav
+#         - say: Wow I wasnt expecting to go first I hope I did a good job 02
+#           audiofile: VO_Wow_I_wasnt_expecting_to_go_first_I_hope_I_did_a_good_job_02.wav
+#         - say: You have to act fast or they get 01
+#           audiofile: VO_You_have_to_act_fast_or_they_get_01.wav
+#         - say: You have to act fast or they get 02
+#           audiofile: VO_You_have_to_act_fast_or_they_get_02.wav
+#         - say: You need to do things in the moment even if 01
+#           audiofile: VO_You_need_to_do_things_in_the_moment_even_if_01.wav
+#         - say: You need to do things in the moment even if 02
+#           audiofile: VO_You_need_to_do_things_in_the_moment_even_if_02.wav
+
+
+          # audiofile: VO_Im_learning_how_to_scan_and_send_images_in_computer_class_02_papernoise.wav
+          # audiofile: VO_I_think_I_understand_what_different_platforms_are_01.wav
+          # audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p1.wav
+          # audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p2.wav
+          # audiofile: VO_I_think_I_understand_what_different_platforms_are_02_p3.wav
+          # audiofile: VO_She_had_a_computer_named_after_fruit_and_01.wav
+          # audiofile: VO_Sometimes_I_watch_the_images_form_and_01.wav
+          # audiofile: VO_Sometimes_I_watch_the_images_form_and_02.wav
+          # audiofile: VO_The_walkie_talkie_is_fun_because_I_feel_like_Im_in_a_detective_movie_01_pickup.wav
+          # audiofile: VO_The_walkie_talkie_is_fun_because_I_feel_like_Im_in_a_detective_movie_02_pickup.wav
+          # audiofile: VO_The_walkie_talkie_is_fun_because_I_feel_like_Im_in_a_detective_movie_03_pickup.wav
+          # audiofile: VO_We_draw_pictures_then_ask_our_parents_01.wav
+          # audiofile: VO_We_draw_pictures_then_ask_our_parents_02.wav
+          # audiofile: VO_We_draw_pictures_then_bring_them_to_school_to_scan_01.wav
+          # audiofile: VO_We_draw_pictures_then_bring_them_to_school_to_scan_02.wav
+          # audiofile: VO_We_re_going_to_watch_a_movie_later_at_the_egyptian_01_pickup.wav
+          # audiofile: VO_We_re_going_to_watch_a_movie_later_at_the_egyptian_02_pickup.wav
+          # audiofile: VO_We_re_going_to_watch_a_movie_later_at_the_egyptian_03_pickup.wav
+
+
+#         - say: Aaand 02.wav
+#           audiofile: VO_Aaand_02.wav
+#         - say: Alright lets start the movie from the beginning 01.wav
+#           audiofile: VO_Alright_lets_start_the_movie_from_the_beginning_01.wav
+#         - say: Alright lets start the movie from the beginning 02.wav
+#           audiofile: VO_Alright_lets_start_the_movie_from_the_beginning_02.wav
+#         - say: Alright oh my gosh i hope you like it 01.wav
+#           audiofile: VO_Alright_oh_my_gosh_i_hope_you_like_it_01.wav
+#         - say: Alright oh my gosh i hope you like it 02.wav
+#           audiofile: VO_Alright_oh_my_gosh_i_hope_you_like_it_02.wav
+#         - say: And describe your process 03.wav
+#           audiofile: VO_And_describe_your_process_03.wav
+#         - say: And describe your process 04.wav
+#           audiofile: VO_And_describe_your_process_04.wav
+#         - say: And describe your process 05.wav
+#           audiofile: VO_And_describe_your_process_05.wav
+#         - say: And i wanna show you my new movie today 01.wav
+#           audiofile: VO_And_i_wanna_show_you_my_new_movie_today_01.wav
+#         - say: And I wanna show you my new movie today 02.wav
+#           audiofile: VO_And_I_wanna_show_you_my_new_movie_today_02.wav
+#         - say: And I wanna show you my new movie today 03.wav
+#           audiofile: VO_And_I_wanna_show_you_my_new_movie_today_03.wav
+#         - say: Any upcoming roles for you 01.wav
+#           audiofile: VO_Any_upcoming_roles_for_you_01.wav
+#         - say: Any upcoming roles for you 02.wav
+#           audiofile: VO_Any_upcoming_roles_for_you_02.wav
+#         - say: Are you a method actor 01.wav
+#           audiofile: VO_Are_you_a_method_actor_01.wav
+#         - say: Are you a method actor 02.wav
+#           audiofile: VO_Are_you_a_method_actor_02.wav
+#         - say: At first i thought i know exactly what the movie should be about 01.wav
+#           audiofile: VO_At_first_i_thought_i_know_exactly_what_the_movie_should_be_about_01.wav
+#         - say: At first i thought i know exactly what the movie should be about 02.wav
+#           audiofile: VO_At_first_i_thought_i_know_exactly_what_the_movie_should_be_about_02.wav
+#         - say: At first i thought i know exactly what the movie should be about 03.wav
+#           audiofile: VO_At_first_i_thought_i_know_exactly_what_the_movie_should_be_about_03.wav
+#         - say: At first i thought i know exactly what the movie should be about 04.wav
+#           audiofile: VO_At_first_i_thought_i_know_exactly_what_the_movie_should_be_about_04.wav
+#         - say: A friend of mine said you arent supposed to tell everyone about 01 mumble.wav
+#           audiofile: VO_A_friend_of_mine_said_you_arent_supposed_to_tell_everyone_about_01_mumble.wav
+#         - say: A friend of mine said you arent supposed to tell everyone about 02.wav
+#           audiofile: VO_A_friend_of_mine_said_you_arent_supposed_to_tell_everyone_about_02.wav
+#         - say: A friend of mine said you arent supposed to tell everyone about you should just hit play 0.wav
+#           audiofile: VO_A_friend_of_mine_said_you_arent_supposed_to_tell_everyone_about_you_should_just_hit_play_02.wav
+#         - say: Because i didnt know how to make them 02.wav
+#           audiofile: VO_Because_i_didnt_know_how_to_make_them_02.wav
+#         - say: But when i asked people for their honest feedback 01.wav
+#           audiofile: VO_But_when_i_asked_people_for_their_honest_feedback_01.wav
+#         - say: But when i asked people for their honest feedback 02.wav
+#           audiofile: VO_But_when_i_asked_people_for_their_honest_feedback_02.wav
+#         - say: But when i asked people for their honest feedback 03.wav
+#           audiofile: VO_But_when_i_asked_people_for_their_honest_feedback_03.wav
+#         - say: But when i asked people for their honest feedback 04.wav
+#           audiofile: VO_But_when_i_asked_people_for_their_honest_feedback_04.wav
+#         - say: But you know what they say the show must go on 01.wav
+#           audiofile: VO_But_you_know_what_they_say_the_show_must_go_on_01.wav
+#         - say: But you know what they say the show must go on 02.wav
+#           audiofile: VO_But_you_know_what_they_say_the_show_must_go_on_02.wav
+#         - say: Bye sundance 01.wav
+#           audiofile: VO_Bye_sundance_01.wav
+#         - say: Bye sundance 02.wav
+#           audiofile: VO_Bye_sundance_02.wav
+#         - say: Bye sundance 03.wav
+#           audiofile: VO_Bye_sundance_03.wav
+#         - say: Can everyone hear me 02.wav
+#           audiofile: VO_Can_everyone_hear_me_02.wav
+#         - say: Dad didnt let me make a fire inside 01.wav
+#           audiofile: VO_Dad_didnt_let_me_make_a_fire_inside_01.wav
+#         - say: Dad didnt let me make a fire inside 02.wav
+#           audiofile: VO_Dad_didnt_let_me_make_a_fire_inside_02.wav
+#         - say: Dad didnt let me make a fire inside 03.wav
+#           audiofile: VO_Dad_didnt_let_me_make_a_fire_inside_03.wav
+#         - say: Did you do a lot of research about him 01.wav
+#           audiofile: VO_Did_you_do_a_lot_of_research_about_him_01.wav
+#         - say: Did you do a lot of research about him 02.wav
+#           audiofile: VO_Did_you_do_a_lot_of_research_about_him_02.wav
+#         - say: Did you do a lot of research about him 03.wav
+#           audiofile: VO_Did_you_do_a_lot_of_research_about_him_03.wav
+#         - say: Did you like your costume 01.wav
+#           audiofile: VO_Did_you_like_your_costume_01.wav
+#         - say: Did you like your costume 02.wav
+#           audiofile: VO_Did_you_like_your_costume_02.wav
+#         - say: Did you see that 01.wav
+#           audiofile: VO_Did_you_see_that_01.wav
+#         - say: Did you see that 02.wav
+#           audiofile: VO_Did_you_see_that_02.wav
+#         - say: Did you see that 03.wav
+#           audiofile: VO_Did_you_see_that_03.wav
+#         - say: Does anybody know what expressionism is 01.wav
+#           audiofile: VO_Does_anybody_know_what_expressionism_is_01.wav
+#         - say: Does anybody know what expressionism is 02.wav
+#           audiofile: VO_Does_anybody_know_what_expressionism_is_02.wav
+#         - say: Does anybody know what expressionism is 03.wav
+#           audiofile: VO_Does_anybody_know_what_expressionism_is_03.wav
+#         - say: Does anybody know what expressionism is 04.wav
+#           audiofile: VO_Does_anybody_know_what_expressionism_is_04.wav
+#         - say: Does anybody know what expressionism is 05.wav
+#           audiofile: VO_Does_anybody_know_what_expressionism_is_05.wav
+#         - say: Dont touch the camera 01.wav
+#           audiofile: VO_Dont_touch_the_camera_01.wav
+#         - say: Dont touch the camera 02.wav
+#           audiofile: VO_Dont_touch_the_camera_02.wav
+#         - say: Dont touch the camera 03.wav
+#           audiofile: VO_Dont_touch_the_camera_03.wav
+#         - say: Dont touch the camera 04.wav
+#           audiofile: VO_Dont_touch_the_camera_04.wav
+#         - say: Do you know morse code 01.wav
+#           audiofile: VO_Do_you_know_morse_code_01.wav
+#         - say: Do you know morse code 02.wav
+#           audiofile: VO_Do_you_know_morse_code_02.wav
+#         - say: Do you know morse code 03.wav
+#           audiofile: VO_Do_you_know_morse_code_03.wav
+#         - say: Do you think someone else is writing your story 02.wav
+#           audiofile: VO_Do_you_think_someone_else_is_writing_your_story_02.wav
+#         - say: Do you think someone is writing your story 01.wav
+#           audiofile: VO_Do_you_think_someone_is_writing_your_story_01.wav
+#         - say: Exhale its true 01.wav
+#           audiofile: VO_Exhale_its_true_01.wav
+#         - say: Exhale its true 02.wav
+#           audiofile: VO_Exhale_its_true_02.wav
+#         - say: Goodbye sundance 01.wav
+#           audiofile: VO_Goodbye_sundance_01.wav
+#         - say: Has anyone else had that happen to them 01.wav
+#           audiofile: VO_Has_anyone_else_had_that_happen_to_them_01.wav
+#         - say: Has anyone else had that happen to them 02.wav
+#           audiofile: VO_Has_anyone_else_had_that_happen_to_them_02.wav
+#         - say: Has anyone else had that happen to them 03.wav
+#           audiofile: VO_Has_anyone_else_had_that_happen_to_them_03.wav
+#         - say: Hello sundance 01.wav
+#           audiofile: VO_Hello_sundance_01.wav
+#         - say: Hello sundance 02.wav
+#           audiofile: VO_Hello_sundance_02.wav
+#         - say: Here comes the best part 01.wav
+#           audiofile: VO_Here_comes_the_best_part_01.wav
+#         - say: Here come the credits the most important part 01.wav
+#           audiofile: VO_Here_come_the_credits_the_most_important_part_01.wav
+#         - say: Here come the credits the most important part 02.wav
+#           audiofile: VO_Here_come_the_credits_the_most_important_part_02.wav
+#         - say: Here we go 01.wav
+#           audiofile: VO_Here_we_go_01.wav
+#         - say: Here we go 02.wav
+#           audiofile: VO_Here_we_go_02.wav
+#         - say: Hey can everyone hear me 01.wav
+#           audiofile: VO_Hey_can_everyone_hear_me_01.wav
+#         - say: Hey can everyone hear me 02.wav
+#           audiofile: VO_Hey_can_everyone_hear_me_02.wav
+#         - say: He also gave a lot of great notes on his lines 01.wav
+#           audiofile: VO_He_also_gave_a_lot_of_great_notes_on_his_lines_01.wav
+#         - say: He also gave a lot of great notes on his lines 02.wav
+#           audiofile: VO_He_also_gave_a_lot_of_great_notes_on_his_lines_02.wav
+#         - say: Hmm 01 thinking.wav
+#           audiofile: VO_Hmm_01_thinking.wav
+#         - say: Hmm 02 thinking.wav
+#           audiofile: VO_Hmm_02_thinking.wav
+#         - say: Hmm aaand weeelll 01.wav
+#           audiofile: VO_Hmm_aaand_weeelll_01.wav
+#         - say: Hmm and 01.wav
+#           audiofile: VO_Hmm_and_01.wav
+#         - say: Hmm What do you think 03.wav
+#           audiofile: VO_Hmm_What_do_you_think_03.wav
+#         - say: How many people did you bite to understand the characters motivation 01.wav
+#           audiofile: VO_How_many_people_did_you_bite_to_understand_the_characters_motivation_01.wav
+#         - say: How many people did you bite to understand the characters motivation 02.wav
+#           audiofile: VO_How_many_people_did_you_bite_to_understand_the_characters_motivation_02.wav
+#         - say: How was it playing a vampire 01.wav
+#           audiofile: VO_How_was_it_playing_a_vampire_01.wav
+#         - say: Ill never be completely happy with it 01.wav
+#           audiofile: VO_Ill_never_be_completely_happy_with_it_01.wav
+#         - say: Ill never be completely happy with it 02.wav
+#           audiofile: VO_Ill_never_be_completely_happy_with_it_02.wav
+#         - say: Im a bit tired 01.wav
+#           audiofile: VO_Im_a_bit_tired_01.wav
+#         - say: Im a bit tired 02.wav
+#           audiofile: VO_Im_a_bit_tired_02.wav
+#         - say: Im a bit tired I didnt know post production is so much work 01.wav
+#           audiofile: VO_Im_a_bit_tired_I_didnt_know_post_production_is_so_much_work_01.wav
+#         - say: Im a bit tired I didnt know post production was so much work 01.wav
+#           audiofile: VO_Im_a_bit_tired_I_didnt_know_post_production_was_so_much_work_01.wav
+#         - say: Im a bit tired I didnt know post production was so much work 02.wav
+#           audiofile: VO_Im_a_bit_tired_I_didnt_know_post_production_was_so_much_work_02.wav
+#         - say: Im back 01.wav
+#           audiofile: VO_Im_back_01.wav
+#         - say: Im back 02.wav
+#           audiofile: VO_Im_back_02.wav
+#         - say: Im back 03.wav
+#           audiofile: VO_Im_back_03.wav
+#         - say: Im really nervous 01.wav
+#           audiofile: VO_Im_really_nervous_01.wav
+#         - say: Im really nervous 02.wav
+#           audiofile: VO_Im_really_nervous_02.wav
+#         - say: Im really nervous how many people showed up 01.wav
+#           audiofile: VO_Im_really_nervous_how_many_people_showed_up_01.wav
+#         - say: Im really nervous how many people showed up 02.wav
+#           audiofile: VO_Im_really_nervous_how_many_people_showed_up_02.wav
+#         - say: Im sure everyone in the crowed is wondering 01.wav
+#           audiofile: VO_Im_sure_everyone_in_the_crowed_is_wondering_01.wav
+#         - say: Im sure everyone in the crowed is wondering 02.wav
+#           audiofile: VO_Im_sure_everyone_in_the_crowed_is_wondering_02.wav
+#         - say: In the end everything changed 02.wav
+#           audiofile: VO_In_the_end_everything_changed_02.wav
+#         - say: In the end everything changed even the title I didnt expect 01.wav
+#           audiofile: VO_In_the_end_everything_changed_even_the_title_I_didnt_expect_01.wav
+#         - say: In the end everything changed even the title I didnt expect 03.wav
+#           audiofile: VO_In_the_end_everything_changed_even_the_title_I_didnt_expect_03.wav
+#         - say: In the sundance chat room 01.wav
+#           audiofile: VO_In_the_sundance_chat_room_01.wav
+#         - say: In the sundance chat room 02.wav
+#           audiofile: VO_In_the_sundance_chat_room_02.wav
+#         - say: In the sundance chat room 03.wav
+#           audiofile: VO_In_the_sundance_chat_room_03.wav
+#         - say: Is it just me or am I crazy 01.wav
+#           audiofile: VO_Is_it_just_me_or_am_I_crazy_01.wav
+#         - say: Is it just me or am I crazy 02.wav
+#           audiofile: VO_Is_it_just_me_or_am_I_crazy_02.wav
+#         - say: Its at one thirty pm 02.wav
+#           audiofile: VO_Its_at_one_thirty_pm_02.wav
+#         - say: Its at one thirty pm mountain time 01.wav
+#           audiofile: VO_Its_at_one_thirty_pm_mountain_time_01.wav
+#         - say: Its at one thirty pm mountain time 02.wav
+#           audiofile: VO_Its_at_one_thirty_pm_mountain_time_02.wav
+#         - say: Its a process 01.wav
+#           audiofile: VO_Its_a_process_01.wav
+#         - say: Its a process 02.wav
+#           audiofile: VO_Its_a_process_02.wav
+#         - say: Its the question on all of our minds 01.wav
+#           audiofile: VO_Its_the_question_on_all_of_our_minds_01.wav
+#         - say: Its the question on all of our minds 02.wav
+#           audiofile: VO_Its_the_question_on_all_of_our_minds_02.wav
+#         - say: Its the question on all of our minds 03.wav
+#           audiofile: VO_Its_the_question_on_all_of_our_minds_03.wav
+#         - say: I cant hear anything anymore 01.wav
+#           audiofile: VO_I_cant_hear_anything_anymore_01.wav
+#         - say: I cant hear anything anymore 02.wav
+#           audiofile: VO_I_cant_hear_anything_anymore_02.wav
+#         - say: I didnt know post production is so much work 01.wav
+#           audiofile: VO_I_didnt_know_post_production_is_so_much_work_01.wav
+#         - say: I didnt know post production was so much work 01.wav
+#           audiofile: VO_I_didnt_know_post_production_was_so_much_work_01.wav
+#         - say: I didnt know post production was so much work 02.wav
+#           audiofile: VO_I_didnt_know_post_production_was_so_much_work_02.wav
+#         - say: I had to put more work into the script 04.wav
+#           audiofile: VO_I_had_to_put_more_work_into_the_script_04.wav
+#         - say: I had to take out a lot of Ideas 02.wav
+#           audiofile: VO_I_had_to_take_out_a_lot_of_Ideas_02.wav
+#         - say: I had to take out a lot of Ideas because i didnt know how to make them 01.wav
+#           audiofile: VO_I_had_to_take_out_a_lot_of_Ideas_because_i_didnt_know_how_to_make_them_01.wav
+#         - say: I had to take out a lot of Ideas because i didnt know how to make them 02.wav
+#           audiofile: VO_I_had_to_take_out_a_lot_of_Ideas_because_i_didnt_know_how_to_make_them_02.wav
+#         - say: I hope i can come back some day and meet all of you again 01.wav
+#           audiofile: VO_I_hope_i_can_come_back_some_day_and_meet_all_of_you_again_01.wav
+#         - say: I hope i can come back some day and meet all of you again 02.wav
+#           audiofile: VO_I_hope_i_can_come_back_some_day_and_meet_all_of_you_again_02.wav
+#         - say: I knew i had to put more work into the script 01.wav
+#           audiofile: VO_I_knew_i_had_to_put_more_work_into_the_script_01.wav
+#         - say: I knew i had to put more work into the script 02 small misspoke.wav
+#           audiofile: VO_I_knew_i_had_to_put_more_work_into_the_script_02_small_misspoke.wav
+#         - say: I knew i had to put more work into the script 03.wav
+#           audiofile: VO_I_knew_i_had_to_put_more_work_into_the_script_03.wav
+#         - say: I m a bit tired 01.wav
+#           audiofile: VO_I_m_a_bit_tired_01.wav
+#         - say: I m screening it in my living room 01.wav
+#           audiofile: VO_I_m_screening_it_in_my_living_room_01.wav
+#         - say: I m screening it in my living room 02.wav
+#           audiofile: VO_I_m_screening_it_in_my_living_room_02.wav
+#         - say: I m working on it 01.wav
+#           audiofile: VO_I_m_working_on_it_01.wav
+#         - say: I m working on it 02.wav
+#           audiofile: VO_I_m_working_on_it_02.wav
+#         - say: I m working on it 03.wav
+#           audiofile: VO_I_m_working_on_it_03.wav
+#         - say: I m   cutoff 02.wav
+#           audiofile: VO_I_m___cutoff_02.wav
+#         - say: I read somewhere 01.wav
+#           audiofile: VO_I_read_somewhere_01.wav
+#         - say: I read somewhere 02.wav
+#           audiofile: VO_I_read_somewhere_02.wav
+#         - say: I read somewhere Shadows are a reflection of life 02.wav
+#           audiofile: VO_I_read_somewhere_Shadows_are_a_reflection_of_life_02.wav
+#         - say: I read somewhere Shadows are a reflection of life 03.wav
+#           audiofile: VO_I_read_somewhere_Shadows_are_a_reflection_of_life_03.wav
+#         - say: I really wanna thank all my new friends who gave feedback on my piece 01.wav
+#           audiofile: VO_I_really_wanna_thank_all_my_new_friends_who_gave_feedback_on_my_piece_01.wav
+#         - say: I really wanna thank all my new friends who gave feedback on my piece 02 hangs abit.wav
+#           audiofile: VO_I_really_wanna_thank_all_my_new_friends_who_gave_feedback_on_my_piece_02_hangs_abit.wav
+#         - say: I see them dance somtimes on my wall when its windy outside 01.wav
+#           audiofile: VO_I_see_them_dance_somtimes_on_my_wall_when_its_windy_outside_01.wav
+#         - say: I see them dance somtimes on my wall when its windy outside 02.wav
+#           audiofile: VO_I_see_them_dance_somtimes_on_my_wall_when_its_windy_outside_02.wav
+#         - say: I think its good that I cant see anyone or Id be even more nervous 01.wav
+#           audiofile: VO_I_think_its_good_that_I_cant_see_anyone_or_Id_be_even_more_nervous_01.wav
+#         - say: I think its good that I cant see anyone or Id be even more nervous 02.wav
+#           audiofile: VO_I_think_its_good_that_I_cant_see_anyone_or_Id_be_even_more_nervous_02.wav
+#         - say: I think its good that I cant see anyone or Id be even more nervous 03.wav
+#           audiofile: VO_I_think_its_good_that_I_cant_see_anyone_or_Id_be_even_more_nervous_03.wav
+#         - say: I think my dad plugged in one of his big speakers 01.wav
+#           audiofile: VO_I_think_my_dad_plugged_in_one_of_his_big_speakers_01.wav
+#         - say: I think my dad plugged in one of his big speakers 02.wav
+#           audiofile: VO_I_think_my_dad_plugged_in_one_of_his_big_speakers_02.wav
+#         - say: I ve talked a lot giggle 01.wav
+#           audiofile: VO_I_ve_talked_a_lot_giggle_01.wav
+#         - say: I ve talked a lot giggle 02.wav
+#           audiofile: VO_I_ve_talked_a_lot_giggle_02.wav
+#         - say: I ve talked a lot giggle 03.wav
+#           audiofile: VO_I_ve_talked_a_lot_giggle_03.wav
+#         - say: I wouldnt be surprised to see him at the oscars again 01.wav
+#           audiofile: VO_I_wouldnt_be_surprised_to_see_him_at_the_oscars_again_01.wav
+#         - say: I wouldnt be surprised to see him at the oscars again 02.wav
+#           audiofile: VO_I_wouldnt_be_surprised_to_see_him_at_the_oscars_again_02.wav
+#         - say: I would like to say thank you to everyone whoe helped me write the script 01.wav
+#           audiofile: VO_I_would_like_to_say_thank_you_to_everyone_whoe_helped_me_write_the_script_01.wav
+#         - say: I would like to say thank you to everyone whoe helped me write the script 02.wav
+#           audiofile: VO_I_would_like_to_say_thank_you_to_everyone_whoe_helped_me_write_the_script_02.wav
+#         - say: I    cutoff 01.wav
+#           audiofile: VO_I____cutoff_01.wav
+#         - say: Lets watch some behind the scenes 01.wav
+#           audiofile: VO_Lets_watch_some_behind_the_scenes_01.wav
+#         - say: Lets watch some behind the scenes 02.wav
+#           audiofile: VO_Lets_watch_some_behind_the_scenes_02.wav
+#         - say: Let me know if i need to turn up the volume 01.wav
+#           audiofile: VO_Let_me_know_if_i_need_to_turn_up_the_volume_01.wav
+#         - say: Let me know if i need to turn up the volume 02.wav
+#           audiofile: VO_Let_me_know_if_i_need_to_turn_up_the_volume_02.wav
+#         - say: Like exploding draculas castle 01.wav
+#           audiofile: VO_Like_exploding_draculas_castle_01.wav
+#         - say: Like exploding draculas castle 02.wav
+#           audiofile: VO_Like_exploding_draculas_castle_02.wav
+#         - say: Like making draculas castle explode 01.wav
+#           audiofile: VO_Like_making_draculas_castle_explode_01.wav
+#         - say: Like making draculas castle explode 02.wav
+#           audiofile: VO_Like_making_draculas_castle_explode_02.wav
+#         - say: Maybe hes feeling a bit camera shy right now 01.wav
+#           audiofile: VO_Maybe_hes_feeling_a_bit_camera_shy_right_now_01.wav
+#         - say: Maybe hes feeling a bit camera shy right now 02.wav
+#           audiofile: VO_Maybe_hes_feeling_a_bit_camera_shy_right_now_02.wav
+#         - say: Maybe hes feeling a bit camera shy right now 03 gets quiete in end.wav
+#           audiofile: VO_Maybe_hes_feeling_a_bit_camera_shy_right_now_03_gets_quiete_in_end.wav
+#         - say: Maybe he can answer some questions later 01.wav
+#           audiofile: VO_Maybe_he_can_answer_some_questions_later_01.wav
+#         - say: Maybe he can answer some questions later 02.wav
+#           audiofile: VO_Maybe_he_can_answer_some_questions_later_02.wav
+#         - say: Maybe one thing 02.wav
+#           audiofile: VO_Maybe_one_thing_02.wav
+#         - say: maybe youll have your premiere here at sundance 02 slightly misspoke.wav
+#           audiofile: VO_maybe_youll_have_your_premiere_here_at_sundance_02_slightly_misspoke.wav
+#         - say: mountain time 02.wav
+#           audiofile: VO_mountain_time_02.wav
+#         - say: Music can be scary too 01.wav
+#           audiofile: VO_Music_can_be_scary_too_01.wav
+#         - say: My name is lucy 01.wav
+#           audiofile: VO_My_name_is_lucy_01.wav
+#         - say: My name is lucy 02.wav
+#           audiofile: VO_My_name_is_lucy_02.wav
+#         - say: My name is lucy 03.wav
+#           audiofile: VO_My_name_is_lucy_03.wav
+#         - say: My name is lucy and I wanna show you my new movie today 02.wav
+#           audiofile: VO_My_name_is_lucy_and_I_wanna_show_you_my_new_movie_today_02.wav
+#         - say: My name is lucy and I wanna show you my new movie today 03.wav
+#           audiofile: VO_My_name_is_lucy_and_I_wanna_show_you_my_new_movie_today_03.wav
+#         - say: Notice the music here 01.wav
+#           audiofile: VO_Notice_the_music_here_01.wav
+#         - say: Notice the music here 02.wav
+#           audiofile: VO_Notice_the_music_here_02.wav
+#         - say: Oh and one more thing 01.wav
+#           audiofile: VO_Oh_and_one_more_thing_01.wav
+#         - say: Oh and one more thing 02.wav
+#           audiofile: VO_Oh_and_one_more_thing_02.wav
+#         - say: Oh and thank you to Abi 01.wav
+#           audiofile: VO_Oh_and_thank_you_to_Abi_01.wav
+#         - say: Oh and thank you to Abi 02.wav
+#           audiofile: VO_Oh_and_thank_you_to_Abi_02.wav
+#         - say: Oh and thank you to Abi 03.wav
+#           audiofile: VO_Oh_and_thank_you_to_Abi_03.wav
+#         - say: Oh and thank you to Abi 04.wav
+#           audiofile: VO_Oh_and_thank_you_to_Abi_04.wav
+#         - say: Oh and thank you to Abi 05.wav
+#           audiofile: VO_Oh_and_thank_you_to_Abi_05.wav
+#         - say: Oh can i take a picture 01.wav
+#           audiofile: VO_Oh_can_i_take_a_picture_01.wav
+#         - say: Oh can i take a picture 02.wav
+#           audiofile: VO_Oh_can_i_take_a_picture_02.wav
+#         - say: Oh can i take a picture 03.wav
+#           audiofile: VO_Oh_can_i_take_a_picture_03.wav
+#         - say: Oh hi Abi 01.wav
+#           audiofile: VO_Oh_hi_Abi_01.wav
+#         - say: Oh hi Abi 02.wav
+#           audiofile: VO_Oh_hi_Abi_02.wav
+#         - say: Oh I always wanted a telegram 01.wav
+#           audiofile: VO_Oh_I_always_wanted_a_telegram_01.wav
+#         - say: Oh I always wanted a telegram 02.wav
+#           audiofile: VO_Oh_I_always_wanted_a_telegram_02.wav
+#         - say: Oh I always wanted a telegram 03.wav
+#           audiofile: VO_Oh_I_always_wanted_a_telegram_03.wav
+#         - say: Oh my gosh so many 01.wav
+#           audiofile: VO_Oh_my_gosh_so_many_01.wav
+#         - say: Oh no I think my brother is using the computer 01.wav
+#           audiofile: VO_Oh_no_I_think_my_brother_is_using_the_computer_01.wav
+#         - say: Oh no I think my brother is using the computer 02.wav
+#           audiofile: VO_Oh_no_I_think_my_brother_is_using_the_computer_02.wav
+#         - say: Oh oh wait 02.wav
+#           audiofile: VO_Oh_oh_wait_02.wav
+#         - say: Oh wait maybe one thing 01.wav
+#           audiofile: VO_Oh_wait_maybe_one_thing_01.wav
+#         - say: Oh you wanna switch to directing 01.wav
+#           audiofile: VO_Oh_you_wanna_switch_to_directing_01.wav
+#         - say: Oh you wanna switch to directing 02.wav
+#           audiofile: VO_Oh_you_wanna_switch_to_directing_02.wav
+#         - say: Oh you wanna switch to directing 03.wav
+#           audiofile: VO_Oh_you_wanna_switch_to_directing_03.wav
+#         - say: Okay let me ask pig a few questions 01.wav
+#           audiofile: VO_Okay_let_me_ask_pig_a_few_questions_01.wav
+#         - say: Okay let me ask pig a few questions 02.wav
+#           audiofile: VO_Okay_let_me_ask_pig_a_few_questions_02.wav
+#         - say: Okay perfect we ll be ready in just a second 01.wav
+#           audiofile: VO_Okay_perfect_we_ll_be_ready_in_just_a_second_01.wav
+#         - say: Okay perfect we ll be ready in just a second 02.wav
+#           audiofile: VO_Okay_perfect_we_ll_be_ready_in_just_a_second_02.wav
+#         - say: Or sinking the ship he arrives on 01.wav
+#           audiofile: VO_Or_sinking_the_ship_he_arrives_on_01.wav
+#         - say: Or sinking the ship he arrives on 02.wav
+#           audiofile: VO_Or_sinking_the_ship_he_arrives_on_02.wav
+#         - say: Or write me a letter 01.wav
+#           audiofile: VO_Or_write_me_a_letter_01.wav
+#         - say: Or write me a letter 02.wav
+#           audiofile: VO_Or_write_me_a_letter_02.wav
+#         - say: Or write me a letter 03.wav
+#           audiofile: VO_Or_write_me_a_letter_03.wav
+#         - say: Out take Abi is pronounced A bi 01 optional.wav
+#           audiofile: VO_Out_take_Abi_is_pronounced_A_bi_01_optional.wav
+#         - say: out take Its really hard to put in the credits 01.wav
+#           audiofile: VO_out_take_Its_really_hard_to_put_in_the_credits_01.wav
+#         - say: out take Oh and thanks to Abi for having the most difficult and annoying name 01.wav
+#           audiofile: VO_out_take_Oh_and_thanks_to_Abi_for_having_the_most_difficult_and_annoying_name_01.wav
+#         - say: Pig puppet the star of the movie is with us today 01.wav
+#           audiofile: VO_Pig_puppet_the_star_of_the_movie_is_with_us_today_01.wav
+#         - say: Pig puppet the star of the movie is with us today 02.wav
+#           audiofile: VO_Pig_puppet_the_star_of_the_movie_is_with_us_today_02.wav
+#         - say: Pig puppet was interviewed this morning 01.wav
+#           audiofile: VO_Pig_puppet_was_interviewed_this_morning_01.wav
+#         - say: Pig puppet was interviewed this morning 02.wav
+#           audiofile: VO_Pig_puppet_was_interviewed_this_morning_02.wav
+#         - say: Pig tell us 01.wav
+#           audiofile: VO_Pig_tell_us_01.wav
+#         - say: Pig tell us how was it playing a vampire 01.wav
+#           audiofile: VO_Pig_tell_us_how_was_it_playing_a_vampire_01.wav
+#         - say: Pig why dont you turn around 01.wav
+#           audiofile: VO_Pig_why_dont_you_turn_around_01.wav
+#         - say: Pig why dont you turn around 02.wav
+#           audiofile: VO_Pig_why_dont_you_turn_around_02.wav
+#         - say: Psst pig puppet dont eat so loudly 01.wav
+#           audiofile: VO_Psst_pig_puppet_dont_eat_so_loudly_01.wav
+#         - say: Psst pig puppet dont eat so loudly 02.wav
+#           audiofile: VO_Psst_pig_puppet_dont_eat_so_loudly_02.wav
+#         - say: Psst pig puppet dont eat so loudly 03.wav
+#           audiofile: VO_Psst_pig_puppet_dont_eat_so_loudly_03.wav
+#         - say: See ya sundance 01.wav
+#           audiofile: VO_See_ya_sundance_01.wav
+#         - say: See you later sundance 01.wav
+#           audiofile: VO_See_you_later_sundance_01.wav
+#         - say: Shadows are a reflection of life 01.wav
+#           audiofile: VO_Shadows_are_a_reflection_of_life_01.wav
+#         - say: Someone said writing is rewriting 01.wav
+#           audiofile: VO_Someone_said_writing_is_rewriting_01.wav
+#         - say: Someone said writing is rewriting 02.wav
+#           audiofile: VO_Someone_said_writing_is_rewriting_02.wav
+#         - say: Someone with your experience and fame could certainly do it 02.wav
+#           audiofile: VO_Someone_with_your_experience_and_fame_could_certainly_do_it_02.wav
+#         - say: Someone with your experience and fame could certainly do it 03.wav
+#           audiofile: VO_Someone_with_your_experience_and_fame_could_certainly_do_it_03.wav
+#         - say: Sometimes improvised which i didnt like 01.wav
+#           audiofile: VO_Sometimes_improvised_which_i_didnt_like_01.wav
+#         - say: Sometimes improvised which i didnt like 02.wav
+#           audiofile: VO_Sometimes_improvised_which_i_didnt_like_02.wav
+#         - say: Sometimes the whole house goes dark 01.wav
+#           audiofile: VO_Sometimes_the_whole_house_goes_dark_01.wav
+#         - say: Sometimes the whole house goes dark 02.wav
+#           audiofile: VO_Sometimes_the_whole_house_goes_dark_02.wav
+#         - say: Soo if you re a little kid close your eyes now and your ears 01.wav
+#           audiofile: VO_Soo_if_you_re_a_little_kid_close_your_eyes_now_and_your_ears_01.wav
+#         - say: Soo if you re a little kid close your eyes now and your music can be scary 01.wav
+#           audiofile: VO_Soo_if_you_re_a_little_kid_close_your_eyes_now_and_your_music_can_be_scary_01.wav
+#         - say: Soo if you re a little kid close your eyes now and your music can be scary 02.wav
+#           audiofile: VO_Soo_if_you_re_a_little_kid_close_your_eyes_now_and_your_music_can_be_scary_02.wav
+#         - say: Soo thats just what Ill do 02.wav
+#           audiofile: VO_Soo_thats_just_what_Ill_do_02.wav
+#         - say: Soo thats what Ill do 01.wav
+#           audiofile: VO_Soo_thats_what_Ill_do_01.wav
+#         - say: Soo thats what Ill do 03.wav
+#           audiofile: VO_Soo_thats_what_Ill_do_03.wav
+#         - say: Tell us a bit about your character 03.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_03.wav
+#         - say: Tell us a bit about your character dracula 01.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_dracula_01.wav
+#         - say: Tell us a bit about your character dracula 02.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_dracula_02.wav
+#         - say: Tell us a bit about your character dracula 03.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_dracula_03.wav
+#         - say: Tell us a bit about your character dracula 05.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_dracula_05.wav
+#         - say: Tell us a bit about your character dracula and describe your process 04.wav
+#           audiofile: VO_Tell_us_a_bit_about_your_character_dracula_and_describe_your_process_04.wav
+#         - say: Tell us pig 01.wav
+#           audiofile: VO_Tell_us_pig_01.wav
+#         - say: Tell us pig what was it like playing a vampire 01.wav
+#           audiofile: VO_Tell_us_pig_what_was_it_like_playing_a_vampire_01.wav
+#         - say: Tell us pig what was it like playing a vampire 02.wav
+#           audiofile: VO_Tell_us_pig_what_was_it_like_playing_a_vampire_02.wav
+#         - say: Tell us pig what was it like playing a vampire 03 Acted.wav
+#           audiofile: VO_Tell_us_pig_what_was_it_like_playing_a_vampire_03_Acted.wav
+#         - say: Thanks Abi 01.wav
+#           audiofile: VO_Thanks_Abi_01.wav
+#         - say: Thanks Abi 02.wav
+#           audiofile: VO_Thanks_Abi_02.wav
+#         - say: Thanks for having me 01.wav
+#           audiofile: VO_Thanks_for_having_me_01.wav
+#         - say: Thanks for having me 02.wav
+#           audiofile: VO_Thanks_for_having_me_02.wav
+#         - say: Thanks for having me 03.wav
+#           audiofile: VO_Thanks_for_having_me_03.wav
+#         - say: Thanks for inviting me 01.wav
+#           audiofile: VO_Thanks_for_inviting_me_01.wav
+#         - say: Thanks for inviting me 02.wav
+#           audiofile: VO_Thanks_for_inviting_me_02.wav
+#         - say: Thanks for inviting me to present here 01.wav
+#           audiofile: VO_Thanks_for_inviting_me_to_present_here_01.wav
+#         - say: Thanks for inviting me to present here 02.wav
+#           audiofile: VO_Thanks_for_inviting_me_to_present_here_02.wav
+#         - say: That was a complicated effect 01.wav
+#           audiofile: VO_That_was_a_complicated_effect_01.wav
+#         - say: That was a complicated effect 02.wav
+#           audiofile: VO_That_was_a_complicated_effect_02.wav
+#         - say: There were costumes missing 01.wav
+#           audiofile: VO_There_were_costumes_missing_01.wav
+#         - say: There were costumes missing 02.wav
+#           audiofile: VO_There_were_costumes_missing_02.wav
+#         - say: The title was dracula 01.wav
+#           audiofile: VO_The_title_was_dracula_01.wav
+#         - say: The title was dracula 02.wav
+#           audiofile: VO_The_title_was_dracula_02.wav
+#         - say: The way pig puppet portrait dracula 02.wav
+#           audiofile: VO_The_way_pig_puppet_portrait_dracula_02.wav
+#         - say: The way pig puppet portrait dracula was outstanding 01.wav
+#           audiofile: VO_The_way_pig_puppet_portrait_dracula_was_outstanding_01.wav
+#         - say: The way pig puppet portrait dracula was outstanding 03.wav
+#           audiofile: VO_The_way_pig_puppet_portrait_dracula_was_outstanding_03.wav
+#         - say: This film is something only we can make together 00 glitch optional.wav
+#           audiofile: VO_This_film_is_something_only_we_can_make_together_00_glitch_optional.wav
+#         - say: This film is something only we can make together 01.wav
+#           audiofile: VO_This_film_is_something_only_we_can_make_together_01.wav
+#         - say: This film is something only we could make together 02.wav
+#           audiofile: VO_This_film_is_something_only_we_could_make_together_02.wav
+#         - say: This might be too scary for little kids 01.wav
+#           audiofile: VO_This_might_be_too_scary_for_little_kids_01.wav
+#         - say: This might be too scary for little kids 02.wav
+#           audiofile: VO_This_might_be_too_scary_for_little_kids_02.wav
+#         - say: Together 02.wav
+#           audiofile: VO_Together_02.wav
+#         - say: Uhhh Here comes the best part 02.wav
+#           audiofile: VO_Uhhh_Here_comes_the_best_part_02.wav
+#         - say: Wait one more thing 01.wav
+#           audiofile: VO_Wait_one_more_thing_01.wav
+#         - say: Wait one more thing 02.wav
+#           audiofile: VO_Wait_one_more_thing_02.wav
+#         - say: Wait one more thing 03.wav
+#           audiofile: VO_Wait_one_more_thing_03.wav
+#         - say: Weeell 02.wav
+#           audiofile: VO_Weeell_02.wav
+#         - say: Well 01.wav
+#           audiofile: VO_Well_01.wav
+#         - say: Well hes never satisfied with his performance on the screen 01.wav
+#           audiofile: VO_Well_hes_never_satisfied_with_his_performance_on_the_screen_01.wav
+#         - say: Well hes never satisfied with his performance on the screen 02.wav
+#           audiofile: VO_Well_hes_never_satisfied_with_his_performance_on_the_screen_02.wav
+#         - say: We can talk there 01.wav
+#           audiofile: VO_We_can_talk_there_01.wav
+#         - say: We can talk there 02.wav
+#           audiofile: VO_We_can_talk_there_02.wav
+#         - say: We can talk there 03.wav
+#           audiofile: VO_We_can_talk_there_03.wav
+#         - say: We finished the movie late last night 01.wav
+#           audiofile: VO_We_finished_the_movie_late_last_night_01.wav
+#         - say: We finished the movie late last night 01 mumble.wav
+#           audiofile: VO_We_finished_the_movie_late_last_night_01_mumble.wav
+#         - say: We finished the movie late last night 02.wav
+#           audiofile: VO_We_finished_the_movie_late_last_night_02.wav
+#         - say: We finished the movie late last night 03.wav
+#           audiofile: VO_We_finished_the_movie_late_last_night_03.wav
+#         - say: We re all looking forward to it 02.wav
+#           audiofile: VO_We_re_all_looking_forward_to_it_02.wav
+#         - say: We re all looking forward to it maybe youll have your premiere here at sundance 01.wav
+#           audiofile: VO_We_re_all_looking_forward_to_it_maybe_youll_have_your_premiere_here_at_sundance_01.wav
+#         - say: We re all looking forward to it maybe youll have your premiere here at sundance 02 slightl.wav
+#           audiofile: VO_We_re_all_looking_forward_to_it_maybe_youll_have_your_premiere_here_at_sundance_02_slightly_misspoke.wav
+#         - say: Whats expressionism 01.wav
+#           audiofile: VO_Whats_expressionism_01.wav
+#         - say: Whats expressionism 02.wav
+#           audiofile: VO_Whats_expressionism_02.wav
+#         - say: What can we expect to see from you in the future 01.wav
+#           audiofile: VO_What_can_we_expect_to_see_from_you_in_the_future_01.wav
+#         - say: What can we expect to see from you in the future 02.wav
+#           audiofile: VO_What_can_we_expect_to_see_from_you_in_the_future_02.wav
+#         - say: What did you all think 01.wav
+#           audiofile: VO_What_did_you_all_think_01.wav
+#         - say: What did you all think 02.wav
+#           audiofile: VO_What_did_you_all_think_02.wav
+#         - say: What did you all think 03.wav
+#           audiofile: VO_What_did_you_all_think_03.wav
+#         - say: What do you think 01.wav
+#           audiofile: VO_What_do_you_think_01.wav
+#         - say: What do you think 02.wav
+#           audiofile: VO_What_do_you_think_02.wav
+#         - say: What do you think 03.wav
+#           audiofile: VO_What_do_you_think_03.wav
+#         - say: What if someone else is writing our story right now 01.wav
+#           audiofile: VO_What_if_someone_else_is_writing_our_story_right_now_01.wav
+#         - say: What if someone else is writing our story right now 02.wav
+#           audiofile: VO_What_if_someone_else_is_writing_our_story_right_now_02.wav
+#         - say: Who would like to share what it is with the group 01.wav
+#           audiofile: VO_Who_would_like_to_share_what_it_is_with_the_group_01.wav
+#         - say: Who would like to share what it is with the group 02.wav
+#           audiofile: VO_Who_would_like_to_share_what_it_is_with_the_group_02.wav
+#         - say: Would it be okay with everyone if I take pictures of the group 01.wav
+#           audiofile: VO_Would_it_be_okay_with_everyone_if_I_take_pictures_of_the_group_01.wav
+#         - say: Would it be okay with everyone if I take pictures of the group 02.wav
+#           audiofile: VO_Would_it_be_okay_with_everyone_if_I_take_pictures_of_the_group_02.wav
+#         - say: Would it be okay with everyone if I take pictures of the group 03.wav
+#           audiofile: VO_Would_it_be_okay_with_everyone_if_I_take_pictures_of_the_group_03.wav
+#         - say: Yawn 01.wav
+#           audiofile: VO_Yawn_01.wav
+#         - say: You can find it in the program 01.wav
+#           audiofile: VO_You_can_find_it_in_the_program_01.wav
+#         - say: You can find it in the program 02.wav
+#           audiofile: VO_You_can_find_it_in_the_program_02.wav
+#         - say: You can find it in the program 03.wav
+#           audiofile: VO_You_can_find_it_in_the_program_03.wav
+#         - say: You can send me a message over the computer 01.wav
+#           audiofile: VO_You_can_send_me_a_message_over_the_computer_01.wav
+#         - say: You can send me a message over the computer 02.wav
+#           audiofile: VO_You_can_send_me_a_message_over_the_computer_02.wav
+#         - say: You can send me a message over the computer 03.wav
+#           audiofile: VO_You_can_send_me_a_message_over_the_computer_03.wav
+#         - say: You re having questions 01.wav
+#           audiofile: VO_You_re_having_questions_01.wav
+#         - say: You re having questions 02.wav
+#           audiofile: VO_You_re_having_questions_02.wav
+#         - say: You should just hit play 01.wav
+#           audiofile: VO_You_should_just_hit_play_01.wav
+#         - say: You should just hit play 02.wav
+#           audiofile: VO_You_should_just_hit_play_02.wav
+
+#         - say: It's called Dracula - Blood Gazpacho
+#           audiofile: VO_Its_called_Dracula_Blood_02.wav
+#         - say: It's called Dracula - Blood Gazpacho
+#           audiofile: VO_Its_called_Dracula_Blood_01.wav
+#         - say: It's called Dracula - Blood Gazpacho
+#           audiofile: VO_Its_called_Dracula_Blood_03.wav
+#         - say: It's called Dracula - Blood Gazpacho
+#           audiofile: VO_Its_called_Dracula_Blood_04.wav
+#         - say: It's more funny than scary
+#           audiofile: VO_Its_more_funny_than_scary_01.wav
+#        # - say: It's more funny than scary
+#        #   audiofile: VO_Its_more_funny_than_scary_02.wav #Doesn't exist
+#         - say: It's more funny than scary
+#           audiofile: VO_Its_more_funny_than_scary_03.wav
+#         - say: It's more funny than scary
+#           audiofile: VO_Its_more_funny_than_scary_04.wav
+#         - say: It has a lot of blood in it
+#           audiofile: VO_It_has_a_lot_of_blood_in_it_01.wav
+#         - say: It has a lot of blood in it
+#           audiofile: VO_It_has_a_lot_of_blood_in_it_02.wav
+#         - say: It has a lot of blood in it
+#           audiofile: VO_It_has_a_lot_of_blood_in_it_03.wav
+#         - say: It has a lot of blood in it
+#           audiofile: VO_It_has_a_lot_of_blood_in_it_04.wav
+#         - say: So its not for little kids...
+#           audiofile: VO_So_its_not_for_little_kids_or_01.wav
+#         - say: So its not for little kids...
+#           audiofile: VO_So_its_not_for_little_kids_or_02_flub.wav
+#         - say: So its not for little kids or little piggies
+#           audiofile: VO_So_its_not_for_little_kids_or_piggies_01.wav
+#         - say: So its not for little kids or little piggies
+#           audiofile: VO_So_its_not_for_little_kids_or_piggies_02.wav
+#         - say: Dash helped me so much
+#           audiofile: VO_Dash_helped_me_so_much_01.wav
+#         - say: Dash helped me so much
+#           audiofile: VO_Dash_helped_me_so_much_02.wav
+#         - say: Dash and Hannah helped me so much
+#           audiofile: VO_Dash_and_Hannah_helped_me_so_much_01.wav
+#         - say: Dash and Hannah helped me so much
+#           audiofile: VO_Dash_and_Hannah_helped_me_so_much_02.wav
+#         - say: Hanna was so great
+#           audiofile: VO_Hanna_was_so_great_01.wav
+#         - say:  Hanna was so great
+#           audiofile: VO_Hanna_was_so_great_02.wav
+#         - say: Oh hey so glad you came
+#           audiofile: VO_Oh_hey_so_glad_you_came_01.wav
+#         - say: Oh hey so glad you came
+#           audiofile: VO_Oh_hey_so_glad_you_came_02.wav
+#         - say: Thanks so much for helping me
+#           audiofile: VO_Thanks_so_much_for_helping_me_01.wav
+#         - say: Thanks so much for helping me
+#           audiofile: VO_Thanks_so_much_for_helping_me_02.wav
+#         - say: Amanda too
+#           audiofile: VO_Amanda_too_01.wav
+#         - say: Amanda too
+#           audiofile: VO_Amanda_too_02.wav
+#         - say: Aaaand.... 
+#           audiofile: VO_Aaand_01.wav
+#         - say: Aaaand.... 
+#           audiofile: VO_Aaand_02.wav
+#         - say: I couldn't have made this without 
+#           audiofile: VO_I_couldnt_have_made_this_without_01.wav
+#         - say: I couldn't have made this without 
+#           audiofile: VO_I_couldnt_have_made_this_without_02.wav
+#         - say: I couldn't have made this without 
+#           audiofile: VO_I_couldnt_have_made_this_without_03.wav
+#         - say: She helped me finalize it 
+#           audiofile: VO_She_helped_me_finalize_it_01.wav
+#         - say: She helped me finalize it
+#           audiofile: VO_She_helped_me_finalize_it_02.wav
+#         - say: She had so many cool ideas
+#           audiofile: VO_She_had_so_many_cool_ideas_01.wav
+#         - say: She had so many cool ideas
+#           audiofile: VO_She_had_so_many_cool_ideas_02.wav
+#         - say: He had so many cool ideas
+#           audiofile: VO_He_had_so_many_cool_ideas_01.wav
+#         - say: He had so many cool ideas
+#           audiofile: VO_He_had_so_many_cool_ideas_02.wav
+#         - say: They had so many cool ideas
+#           audiofile: VO_They_had_so_many_cool_ideas_01.wav
+#         - say: They had so many cool ideas
+#           audiofile: VO_They_had_so_many_cool_ideas_02.wav
+#         - say: But Dash and I liked Dracula
+#           audiofile: VO_But_Dash_and_I_liked_Dracula_01.wav
+#         - say: But Dash and I liked Dracula
+#           audiofile: VO_But_Dash_and_I_liked_Dracula_02.wav
+#         - say: Because it's so funny
+#           audiofile: VO_Because_its_so_funny_01.wav
+#         - say: Because it's so funny
+#           audiofile: VO_Because_its_so_funny_02.wav
+#         - say: Also because that's what the story
+#           audiofile: VO_Also_because_thats_what_the_story_01.wav
+#         - say: Also because that's what the story
+#           audiofile: VO_Also_because_thats_what_the_story_02.wav
+#         - say: Of course not
+#           audiofile: VO_Of_course_not_01.wav
+#         - say: Of course not
+#           audiofile: VO_Of_course_not_02.wav
+#         - say: Are you crazy
+#           audiofile: VO_Are_you_crazy_01.wav
+#         - say: Are you crazy
+#           audiofile: VO_Are_you_crazy_02.wav
+#         - say: The blood's not real
+#           audiofile: VO_The_bloods_not_real_01.wav
+#         - say: The blood's not real
+#           audiofile: VO_The_bloods_not_real_02.wav
+#         - say: It's just jam. A lot of it.
+#           audiofile: VO_Its_just_jam_a_lot_of_it_01.wav
+#         - say: It's just jam. A lot of it.
+#           audiofile: VO_Its_just_jam_a_lot_of_it_02.wav
+#         - say: Oh well mom was pretty angry
+#           audiofile: VO_Oh_well_mom_was_pretty_angry_01.wav
+#         - say: Oh well mom was pretty angry
+#           audiofile: VO_Oh_well_mom_was_pretty_angry_02.wav
+#         - say: Oh well mom was pretty angry
+#           audiofile: VO_Oh_well_mom_was_pretty_angry_03.wav
+#         - say: But she was making jam in 
+#           audiofile: VO_But_she_was_making_jam_in_01.wav
+#         - say: But she was making jam in 
+#           audiofile: VO_But_she_was_making_jam_in_02.wav
+#         - say: My account is Lucy and Pig Puppet
+#           audiofile: VO_My_account_is_lucy_and_pig_puppet_01.wav
+#         - say: My account is Lucy and Pig Puppet
+#           audiofile: VO_My_account_is_lucy_and_pig_puppet_02.wav
+#         - say: I can't share all my secrets
+#           audiofile: VO_I_cant_share_all_my_secrets_01.wav
+#         - say: I can't share all my secrets
+#           audiofile: VO_I_cant_share_all_my_secrets_02.wav
+#         - say: I can't share all my secrets
+#           audiofile: VO_I_cant_share_all_my_secrets_03.wav
+#         - say: It was just intuition
+#           audiofile: VO_It_was_just_intuition_01.wav
+#         - say: It was just intuition
+#           audiofile: VO_It_was_just_intuition_02.wav
+#         - say: It was based on intuition
+#           audiofile: VO_It_was_based_on_intuition_01.wav
+#         - say: It was based on intuition
+#           audiofile: VO_It_was_based_on_intuition_02.wav
+#         - say: Pig tells me you've gotta trust your gut
+#           audiofile: VO_Pig_tells_me_youve_gotta_trust_01.wav
+#         - say: Pig tells me you've gotta trust your gut
+#           audiofile: VO_Pig_tells_me_youve_gotta_trust_02.wav
+#         - say: Sometimes pig was behind the camera
+#           audiofile: VO_Sometimes_pig_was_behind_the_01.wav
+#         - say: Sometimes pig was behind the camera
+#           audiofile: VO_Sometimes_pig_was_behind_the_02.wav
+#         - say: Cough
+#           audiofile: VO_Cough_01.wav
+#         - say: Well Pig and I talk a lot
+#           audiofile: VO_Well_pig_and_I_talk_a_lot_01.wav
+#         - say: Well Pig and I talk a lot
+#           audiofile: VO_Well_pig_and_I_talk_a_lot_02.wav
+#         - say: Well Pig and I talk a lot
+#           audiofile: VO_Well_pig_and_I_talk_a_lot_03.wav
+#         - say: I read Dracula last Halloween
+#           audiofile: VO_I_read_dracula_last_halloween_01.wav
+#         - say: I read Dracula last Halloween
+#           audiofile: VO_I_read_dracula_last_halloween_02.wav
+#         - say: I read Dracula last Halloween
+#           audiofile: VO_I_read_dracula_last_halloween_03.wav
+#         - say: I read Dracula last Halloween
+#           audiofile: VO_I_read_dracula_last_halloween_04.wav
+#         - say: Well that was Hannah's idea
+#           audiofile: VO_Well_that_was_hannahs_idea_01.wav
+#         - say: Well that was Hannah's idea
+#           audiofile: VO_Well_that_was_hannahs_idea_02.wav
+#         - say: Dash really liked the title. One original working title was
+#           audiofile: VO_Dash_really_liked_the_title_One_original_02.wav
+#         - say: Dash really liked the title. One original working title was
+#           audiofile: VO_Dash_really_liked_the_title_One_original_01.wav
+
+
+
+# ######### LOOP ##
+#     - goto: CADENCE 
